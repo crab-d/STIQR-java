@@ -6,20 +6,118 @@
     android:padding="10dp"
     tools:context=".student.fragment.schedule">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="MONDAY"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:background="@color/primary"
-        android:textColor="@color/white"
-        android:textSize="20dp"/>
+        android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/rv_monday"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MONDAY"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:background="@color/primary"
+                android:textColor="@color/white"
+                android:textSize="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:id="@+id/rv_monday"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TUESDAY"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:background="@color/primary"
+                android:textColor="@color/white"
+                android:textSize="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:id="@+id/rv_tuesday"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="WEDNESDAY"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:background="@color/primary"
+                android:textColor="@color/white"
+                android:textSize="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:id="@+id/rv_wednesday"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="THURSDAY"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:background="@color/primary"
+                android:textColor="@color/white"
+                android:textSize="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:id="@+id/rv_thursday"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FRIDAY"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:background="@color/primary"
+                android:textColor="@color/white"
+                android:textSize="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:id="@+id/rv_friday"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SATURDAY"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:background="@color/primary"
+                android:textColor="@color/white"
+                android:textSize="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:id="@+id/rv_saturday"/>
+
+        </LinearLayout>
+    </ScrollView>
+
 
 
 </FrameLayout>

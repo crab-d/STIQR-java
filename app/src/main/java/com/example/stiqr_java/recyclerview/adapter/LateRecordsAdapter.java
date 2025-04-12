@@ -34,7 +34,7 @@ public class LateRecordsAdapter extends RecyclerView.Adapter<LateRecordsAdapter.
     @Override
     public void onBindViewHolder(@NonNull ScheduleHolder holder, int position) {
         holder.tv_date.setText(lateRecord.get(position).getDate());
-        holder.tv_lateArrival.setText(lateRecord.get(position).getLateArrival());
+        holder.tv_lateArrival.setText(lateRecord.get(position).getLateArrival() + " MIN. LATE");
         holder.tv_subject.setText(lateRecord.get(position).getSubject());
         holder.tv_teacher.setText(lateRecord.get(position).getTeacher());
         holder.tv_schedule.setText(lateRecord.get(position).getSchedule());

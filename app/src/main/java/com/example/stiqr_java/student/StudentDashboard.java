@@ -6,6 +6,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -16,9 +17,13 @@ import com.example.stiqr_java.R;
 import com.example.stiqr_java.student.fragment.LateRecord;
 import com.example.stiqr_java.student.fragment.StudentHome;
 import com.example.stiqr_java.student.fragment.schedule;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanOptions;
 
 public class StudentDashboard extends AppCompatActivity {
-    TextView tv_home, tv_schedule, tv_records, tv_logout;
+    TextView tv_home, tv_schedule, tv_records, tv_logout, tv_scan;
+    com.example.stiqr_java.firebase.LateRecord DB_LATELOG;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +34,11 @@ public class StudentDashboard extends AppCompatActivity {
         tv_schedule = findViewById(R.id.tv_schedule);
         tv_records = findViewById(R.id.tv_records);
         tv_logout = findViewById(R.id.tv_logout);
+        tv_scan = findViewById(R.id.tv_scan);
+        DB_LATELOG = new com.example.stiqr_java.firebase.LateRecord(this);
 
-        String name = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_NAME", "nAH");
-        Toast.makeText(this, "name" + name, Toast.LENGTH_SHORT).show();
+        String gradeLevel = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_GRADE", "nAH");
+        Toast.makeText(this, "grade" + gradeLevel, Toast.LENGTH_SHORT).show();
 
         tv_records.setOnClickListener(v -> {
             loadFragment(new LateRecord());
@@ -39,6 +46,10 @@ public class StudentDashboard extends AppCompatActivity {
 
         tv_home.setOnClickListener(v -> {
             loadFragment(new StudentHome());
+        });
+
+        tv_scan.setOnClickListener(v -> {
+            scanCode();
         });
 
         tv_schedule.setOnClickListener(v -> {
@@ -55,6 +66,29 @@ public class StudentDashboard extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
+    private void scanCode() {
+        ScanOptions options = new ScanOptions();
+        options.setPrompt("VOLUME UP TO TURN FLASHLIGHT ON");
+        options.setBeepEnabled(true);
+        options.setOrientationLocked(true);
+        options.setCaptureActivity(CaptureActivity.class);
+        barLauncher.launch(options);
+    }
+
+
+    ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result -> {
+       if (result.getContents() != null) {
+           String name = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_NAME", "NAH");
+           String section = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_SECTION", "NAH");
+           String gradeLevel = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_GRADE", "NAH");
+           String teacherEmail = result.getContents();
+           String studentNumber = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_NUMBER", "NAH");
+
+           DB_LATELOG.addLateStudent(name, section, gradeLevel, teacherEmail, studentNumber);
+           Toast.makeText(this, "res: " + result.getContents() , Toast.LENGTH_SHORT).show();
+       }
+    });
 
     private void loadFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();

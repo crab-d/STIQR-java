@@ -1,5 +1,6 @@
 package com.example.stiqr_java.firebase;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
@@ -22,7 +23,7 @@ public class LoginVerification {
         db.collection("schedule").document("");
     }
 
-    public void loginAuthentication(String email, String password) {
+    public void loginAuthentication(String email, String password, Activity activity) {
         db.collection("users").whereEqualTo("email", email).whereEqualTo("password", password).get().addOnSuccessListener(query -> {
             if (!query.isEmpty()) {
                 DocumentSnapshot snapshot = query.getDocuments().get(0);
@@ -38,8 +39,11 @@ public class LoginVerification {
                         .putString("STUDENT_GRADE", gradeLevel)
                         .putBoolean("STUDENT_LOG", true)
                         .apply();
+
                 Intent intent = new Intent(context, StudentDashboard.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 context.startActivity(intent);
+                activity.finish();
             } else {
                 db.collection("teachers").whereEqualTo("email", email).whereEqualTo("password", password).get().addOnSuccessListener(query1 -> {
                     if (!query1.isEmpty()) {
@@ -54,6 +58,7 @@ public class LoginVerification {
                                 .apply();
                         Intent intent = new Intent(context, TeacherDashboard.class);
                         context.startActivity(intent);
+                        activity.finish();
                     } else {
                         Toast.makeText(context, "Invalid credentials. Please try again.", Toast.LENGTH_SHORT).show();
                     }

@@ -3,6 +3,7 @@ package com.example.stiqr_java.firebase;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.example.stiqr_java.recyclerview.adapter.ScheduleAdapter;
 import com.example.stiqr_java.recyclerview.model.ScheduleModel;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -19,20 +20,122 @@ public class StudentSchedule {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public List<ScheduleModel> schedMonday(String gradelevel) {
+    public void schedMonday(String gradelevel, String section, ScheduleCallBack callback) {
         List<ScheduleModel> schedule = new ArrayList<>();
-        db.collection("schedule").document("shs").collection(gradelevel).document("monday").get()
+        db.collection("schedule").document("shs").collection(gradelevel).document(section).collection("monday").get()
                 .addOnSuccessListener(query -> {
-                    if (!query.exists()) {
-                        String subject = query.getString("subject");
-                        String professor = query.getString("professor");
-                        String time = query.getString("time");
-                        String room = query.getString("room");
-                        schedule.add(new ScheduleModel(subject, professor, time, room));
+                    if (!query.isEmpty()) {
+                        for (DocumentSnapshot snapshot : query.getDocuments()) {
+                            String subject = snapshot.getString("subject");
+                            String professor = snapshot.getString("professor");
+                            String time = snapshot.getString("time");
+                            String room = snapshot.getString("room");
+                            schedule.add(new ScheduleModel(subject, professor, time, room));
+                        }
                     } else {
-                        Toast.makeText(context, "NO schedule for monday", Toast.LENGTH_SHORT).show();
+                        schedule.add(new ScheduleModel("NO SCHEDULE", "", "MONDAY", ""));
                     }
+                    callback.onScheduleLoaded(schedule);
                 });
-        return schedule;
     }
+
+    public void schedTuesday(String gradelevel, String section, ScheduleCallBack callback) {
+        List<ScheduleModel> schedule = new ArrayList<>();
+        db.collection("schedule").document("shs").collection(gradelevel).document(section).collection("tuesday").get()
+                .addOnSuccessListener(query -> {
+                    if (!query.isEmpty()) {
+                        for (DocumentSnapshot snapshot : query.getDocuments()) {
+                            String subject = snapshot.getString("subject");
+                            String professor = snapshot.getString("professor");
+                            String time = snapshot.getString("time");
+                            String room = snapshot.getString("room");
+                            schedule.add(new ScheduleModel(subject, professor, time, room));
+                        }
+                    } else {
+                        schedule.add(new ScheduleModel("NO SCHEDULE", "", "TUESDAY", ""));
+                    }
+                    callback.onScheduleLoaded(schedule);
+                });
+    }
+
+    public void schedWednesday(String gradelevel, String section, ScheduleCallBack callback) {
+        List<ScheduleModel> schedule = new ArrayList<>();
+        db.collection("schedule").document("shs").collection(gradelevel).document(section).collection("wednesday").get()
+                .addOnSuccessListener(query -> {
+                    if (!query.isEmpty()) {
+                        for (DocumentSnapshot snapshot : query.getDocuments()) {
+                            String subject = snapshot.getString("subject");
+                            String professor = snapshot.getString("professor");
+                            String time = snapshot.getString("time");
+                            String room = snapshot.getString("room");
+                            schedule.add(new ScheduleModel(subject, professor, time, room));
+                        }
+                    } else {
+                        schedule.add(new ScheduleModel("NO SCHEDULE", "", "WEDNESDAY", ""));
+                    }
+                    callback.onScheduleLoaded(schedule);
+                });
+    }
+
+    public void schedThursday(String gradelevel, String section, ScheduleCallBack callback) {
+        List<ScheduleModel> schedule = new ArrayList<>();
+        db.collection("schedule").document("shs").collection(gradelevel).document(section).collection("thursday").get()
+                .addOnSuccessListener(query -> {
+                    if (!query.isEmpty()) {
+                        for (DocumentSnapshot snapshot : query.getDocuments()) {
+                            String subject = snapshot.getString("subject");
+                            String professor = snapshot.getString("professor");
+                            String time = snapshot.getString("time");
+                            String room = snapshot.getString("room");
+                            schedule.add(new ScheduleModel(subject, professor, time, room));
+                        }
+                    } else {
+                        schedule.add(new ScheduleModel("NO SCHEDULE", "", "THURSDAY", ""));
+                    }
+                    callback.onScheduleLoaded(schedule);
+                });
+    }
+
+    public void schedFriday(String gradelevel, String section, ScheduleCallBack callback) {
+        List<ScheduleModel> schedule = new ArrayList<>();
+        db.collection("schedule").document("shs").collection(gradelevel).document(section).collection("friday").get()
+                .addOnSuccessListener(query -> {
+                    if (!query.isEmpty()) {
+                        for (DocumentSnapshot snapshot : query.getDocuments()) {
+                            String subject = snapshot.getString("subject");
+                            String professor = snapshot.getString("professor");
+                            String time = snapshot.getString("time");
+                            String room = snapshot.getString("room");
+                            schedule.add(new ScheduleModel(subject, professor, time, room));
+                        }
+                    } else {
+                        schedule.add(new ScheduleModel("NO SCHEDULE", "", "FRIDAY", ""));
+                    }
+                    callback.onScheduleLoaded(schedule);
+                });
+    }
+
+    public void schedSaturday(String gradelevel, String section, ScheduleCallBack callback) {
+        List<ScheduleModel> schedule = new ArrayList<>();
+        db.collection("schedule").document("shs").collection(gradelevel).document(section).collection("saturday").get()
+                .addOnSuccessListener(query -> {
+                    if (!query.isEmpty()) {
+                        for (DocumentSnapshot snapshot : query.getDocuments()) {
+                            String subject = snapshot.getString("subject");
+                            String professor = snapshot.getString("professor");
+                            String time = snapshot.getString("time");
+                            String room = snapshot.getString("room");
+                            schedule.add(new ScheduleModel(subject, professor, time, room));
+                        }
+                    } else {
+                        schedule.add(new ScheduleModel("NO SCHEDULE", "", "SATURDAY", ""));
+                    }
+                    callback.onScheduleLoaded(schedule);
+                });
+    }
+
+    public interface ScheduleCallBack {
+        void onScheduleLoaded(List<ScheduleModel> schedule);
+    }
+
 }

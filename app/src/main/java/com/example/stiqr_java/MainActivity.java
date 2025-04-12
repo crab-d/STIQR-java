@@ -26,9 +26,11 @@ public class MainActivity extends AppCompatActivity {
         if (studentLoggedIn) {
             Intent intent = new Intent(this, StudentDashboard.class);
             startActivity(intent);
+            finish();
         } else if (teacherLoggedIn) {
             Intent intent = new Intent(this, TeacherDashboard.class);
             startActivity(intent);
+            finish();
         }
 
         super.onCreate(savedInstanceState);
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         btn_login.setOnClickListener(v -> {
             String email = et_email.getText().toString().toLowerCase().trim();
             String password = et_password.getText().toString().trim();
-            DB.loginAuthentication(email, password);
+            DB.loginAuthentication(email, password, MainActivity.this);
         });
     }
 }

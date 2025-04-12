@@ -10,18 +10,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.stiqr_java.R;
 import com.example.stiqr_java.firebase.StudentSchedule;
 import com.example.stiqr_java.recyclerview.adapter.LateRecordsAdapter;
 import com.example.stiqr_java.recyclerview.adapter.ScheduleAdapter;
+import com.example.stiqr_java.recyclerview.model.ScheduleModel;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link schedule#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class schedule extends Fragment {
+public class schedule extends Fragment  {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,12 +74,52 @@ public class schedule extends Fragment {
         View view = inflater.inflate(R.layout.fragment_schedule, container, false);
         Context context = getContext();
         assert context != null;
-        String gradeLevel = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("SESSION_GRADE", "grade12");
+        String gradeLevel = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_GRADE", "nah");
+        String section = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_SECTION", "nah");
 
         StudentSchedule DB_SCHED = new StudentSchedule(context);
         RecyclerView rv_monday = view.findViewById(R.id.rv_monday);
+        RecyclerView rv_tuesday = view.findViewById(R.id.rv_tuesday);
+        RecyclerView rv_wednesday = view.findViewById(R.id.rv_wednesday);
+        RecyclerView rv_thursday = view.findViewById(R.id.rv_thursday);
+        RecyclerView rv_friday = view.findViewById(R.id.rv_friday);
+        RecyclerView rv_saturday = view.findViewById(R.id.rv_saturday);
+
         rv_monday.setLayoutManager(new LinearLayoutManager(context));
-        rv_monday.setAdapter(new ScheduleAdapter(context, DB_SCHED.schedMonday(gradeLevel)));
+        rv_tuesday.setLayoutManager(new LinearLayoutManager(context));
+        rv_wednesday.setLayoutManager(new LinearLayoutManager(context));
+        rv_thursday.setLayoutManager(new LinearLayoutManager(context));
+        rv_friday.setLayoutManager(new LinearLayoutManager(context));
+        rv_saturday.setLayoutManager(new LinearLayoutManager(context));
+
+        DB_SCHED.schedMonday(gradeLevel, section, schedule -> {
+            ScheduleAdapter MondaySchedAdapter = new ScheduleAdapter(context, schedule);
+            rv_monday.setAdapter(MondaySchedAdapter);
+        });
+
+        DB_SCHED.schedTuesday(gradeLevel, section, schedule -> {
+            ScheduleAdapter TuesdaySchedAdapter = new ScheduleAdapter(context, schedule);
+            rv_tuesday.setAdapter(TuesdaySchedAdapter);
+        });
+
+        DB_SCHED.schedWednesday(gradeLevel, section, schedule -> {
+            ScheduleAdapter WednesdaySchedAdapter = new ScheduleAdapter(context, schedule);
+            rv_wednesday.setAdapter(WednesdaySchedAdapter);
+        });
+
+        DB_SCHED.schedThursday(gradeLevel, section, schedule -> {
+            ScheduleAdapter ThursdaySchedAdapter = new ScheduleAdapter(context, schedule);
+            rv_thursday.setAdapter(ThursdaySchedAdapter);
+        });
+        DB_SCHED.schedFriday(gradeLevel, section, schedule -> {
+            ScheduleAdapter FridaySchedAdapter = new ScheduleAdapter(context, schedule);
+            rv_friday.setAdapter(FridaySchedAdapter);
+        });
+
+        DB_SCHED.schedSaturday(gradeLevel, section, schedule -> {
+            ScheduleAdapter SaturdaySchedAdapter = new ScheduleAdapter(context, schedule);
+            rv_saturday.setAdapter(SaturdaySchedAdapter);
+        });
 
 
         return view;

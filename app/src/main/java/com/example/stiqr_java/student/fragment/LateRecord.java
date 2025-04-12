@@ -1,14 +1,19 @@
 package com.example.stiqr_java.student.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.stiqr_java.R;
+import com.example.stiqr_java.recyclerview.adapter.LateRecordsAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,6 +67,24 @@ public class LateRecord extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_late_record, container, false);
+        Context context = getContext();
+        RecyclerView rv_lateRecords = view.findViewById(R.id.rv_lateRecords);
+        com.example.stiqr_java.firebase.LateRecord DB_LATE = new com.example.stiqr_java.firebase.LateRecord(context);
+
+        assert context != null;
+        String studentNumber = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_NUMBER", "NAG");
+        String gradeLevel = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_GRADE", "NAG");
+        String section = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_SECTION", "NAG");
+
+
+        rv_lateRecords.setLayoutManager(new LinearLayoutManager(context));
+        DB_LATE.readLateRecord(studentNumber, gradeLevel, section, lateRecord -> {
+            LateRecordsAdapter RecordAdapter = new LateRecordsAdapter(context, lateRecord);
+            rv_lateRecords.setAdapter(RecordAdapter);
+            Toast.makeText(context, "size: " + lateRecord.size(), Toast.LENGTH_SHORT).show();
+        } );
+
+
         return view;
     }
 }
