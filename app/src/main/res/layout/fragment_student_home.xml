@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".student.fragment.StudentHome">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:padding="15dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primary"
+                android:text="STUDENT PROFILE"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:textColor="@color/white"
+                android:textAlignment="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#f1f1f1"
+                android:orientation="vertical"
+                android:elevation="4sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NAME: JOHN PAUL BARCINILA"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_name"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EMAIL: BARCINILLA.363495@cubao.sti.edu.ph"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_email"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="STUDENT NUMBER: 02000363495"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_studentNumber"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SECTION: ITM402"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_section"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STATUS"
+                android:textStyle="bold"
+                android:elevation="4sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="15dp"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NOT ELIGIBLE FOR COMMUNITY SERVICE"
+                android:background="@color/yellow"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:elevation="4sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/tv_status"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="#f1f1f1"
+                    android:elevation="4sp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/primary"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="NUMBER OF LATE"
+                        android:textAlignment="center"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="25dp"
+                        android:text="20"
+                        android:textSize="25dp"
+                        android:id="@+id/tv_totalLate"
+                        android:textStyle="bold"
+                        android:textAlignment="center"/>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="#f1f1f1"
+                    android:elevation="4sp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TOTAL HOURS OF LATE"
+                        android:background="@color/primary"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textAlignment="center"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="25dp"
+                        android:textStyle="bold"
+                        android:textSize="25dp"
+                        android:id="@+id/tv_hoursLate"
+                        android:text="20"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SEM 2"
+                android:textStyle="italic"
+                android:textSize="12dp"
+                android:id="@+id/tv_semester"
+                android:textAlignment="textEnd"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RECENT LATE RECORD"
+                android:textStyle="bold"
+                android:elevation="4sp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="15dp"
+                android:textSize="20dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/rv_lateRecords">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    </LinearLayout>
+</FrameLayout>

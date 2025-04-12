@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "231482092485",
+    "project_id": "stiqr-4727f",
+    "storage_bucket": "stiqr-4727f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231482092485:android:16416eb563aabea9c039ac",
+        "android_client_info": {
+          "package_name": "com.example.stiqr_java"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3DRqBT_9ab8rUtDf06WWUkL8xhCinyac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231482092485:android:e2c5697fb43cbf35c039ac",
+        "android_client_info": {
+          "package_name": "com.example.test2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3DRqBT_9ab8rUtDf06WWUkL8xhCinyac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
