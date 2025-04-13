@@ -1,4 +1,4 @@
-package com.example.stiqr_java.student.fragment;
+package com.example.stiqr_java.student.fragment.Record;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.stiqr_java.R;
+import com.example.stiqr_java.firebase.CSRecord;
+import com.example.stiqr_java.recyclerview.adapter.CSRecordsAdapter;
 import com.example.stiqr_java.recyclerview.adapter.LateRecordsAdapter;
 
 /**
@@ -76,11 +79,9 @@ public class LateRecord extends Fragment {
         String gradeLevel = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_GRADE", "NAG");
         String section = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_SECTION", "NAG");
 
-
         rv_lateRecords.setLayoutManager(new LinearLayoutManager(context));
         DB_LATE.readLateRecord(studentNumber, gradeLevel, section, (lateRecord) -> {
             rv_lateRecords.setAdapter(new LateRecordsAdapter(context, lateRecord));
-            Toast.makeText(context, "size: " + lateRecord.size(), Toast.LENGTH_SHORT).show();
         } );
 
 

@@ -14,10 +14,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.stiqr_java.MainActivity;
 import com.example.stiqr_java.R;
-import com.example.stiqr_java.student.fragment.LateRecord;
+import com.example.stiqr_java.student.fragment.Record.LateRecord;
+import com.example.stiqr_java.student.fragment.Record.RecordParentFrag;
 import com.example.stiqr_java.student.fragment.StudentHome;
 import com.example.stiqr_java.student.fragment.schedule;
-import com.google.zxing.integration.android.IntentIntegrator;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
@@ -37,11 +37,12 @@ public class StudentDashboard extends AppCompatActivity {
         tv_scan = findViewById(R.id.tv_scan);
         DB_LATELOG = new com.example.stiqr_java.firebase.LateRecord(this);
 
+
         String gradeLevel = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_GRADE", "nAH");
         Toast.makeText(this, "grade" + gradeLevel, Toast.LENGTH_SHORT).show();
 
         tv_records.setOnClickListener(v -> {
-            loadFragment(new LateRecord());
+            loadFragment(new RecordParentFrag());
         });
 
         tv_home.setOnClickListener(v -> {
@@ -93,7 +94,7 @@ public class StudentDashboard extends AppCompatActivity {
     private void loadFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame, fragment);
+        fragmentTransaction.replace(R.id.frame1, fragment);
         fragmentTransaction.commit();
     }
 }

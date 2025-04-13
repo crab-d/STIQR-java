@@ -24,6 +24,16 @@ public class LoginVerification {
     }
 
     public void loginAuthentication(String email, String password, Activity activity) {
+
+        db.collection("staff").whereEqualTo("email", email).whereEqualTo("password", password).get().addOnSuccessListener(query -> {
+           if (!query.isEmpty()) {
+               context.getSharedPreferences("STAFF_SESSION", Context.MODE_PRIVATE).edit()
+                       .putBoolean("STAFF_LOG", true)
+                       .apply();
+
+           }
+        });
+
         db.collection("users").whereEqualTo("email", email).whereEqualTo("password", password).get().addOnSuccessListener(query -> {
             if (!query.isEmpty()) {
                 DocumentSnapshot snapshot = query.getDocuments().get(0);
@@ -31,12 +41,14 @@ public class LoginVerification {
                 String id = snapshot.getString("studentNumber");
                 String section = snapshot.getString("section");
                 String gradeLevel = snapshot.getString("gradeLevel");
+                String deductor = snapshot.getString("deducCounter");
                 context.getSharedPreferences("STUDENT_SESSION", context.MODE_PRIVATE).edit()
                         .putString("STUDENT_NAME", name)
                         .putString("STUDENT_EMAIL", email)
                         .putString("STUDENT_NUMBER", id)
                         .putString("STUDENT_SECTION", section)
                         .putString("STUDENT_GRADE", gradeLevel)
+                        .putString("STUDENT_DEDUCTOR", deductor)
                         .putBoolean("STUDENT_LOG", true)
                         .apply();
 

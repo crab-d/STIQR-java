@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.stiqr_java.R;
+import com.example.stiqr_java.firebase.CSRecord;
 import com.example.stiqr_java.firebase.LateRecord;
 import com.example.stiqr_java.recyclerview.adapter.LateRecordsAdapter;
 
@@ -82,12 +83,17 @@ public class StudentHome extends Fragment {
         RecyclerView rv_lateRecords = view.findViewById(R.id.rv_lateRecords);
         LateRecord DB_LATE = new LateRecord(context);
 
+
+
         assert context != null;
         String name = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_NAME", "NAH");
         String email = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_EMAIL", "NAH");
         String studentNumber = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_NUMBER", "NAH");
         String section = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_SECTION", "NAH");
         String gradeLevel = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_GRADE", "nah");
+
+//        CSRecord DB_CS = new CSRecord(context);
+//        DB_CS.addCSRecord(name, studentNumber);
 
         tv_name.setText("NAME: " + name);
         tv_email.setText("EMAIL: " + email);

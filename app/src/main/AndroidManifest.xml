@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -15,19 +15,23 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".staff.StaffDashboard"
+            android:exported="false" />
+        <activity
             android:name=".teacher.TeacherDashboard"
             android:exported="false" />
         <activity
             android:name=".student.StudentDashboard"
             android:exported="false" />
-        <activity android:name=".student.CaptureActivity"
+        <activity
+            android:name=".student.CaptureActivity"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
             tools:ignore="DiscouragedApi" />
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTask"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
