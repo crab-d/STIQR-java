@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
     tools:context=".student.fragment.StudentHome">
 
@@ -21,6 +22,8 @@
             android:orientation="vertical">
 
             <TextView
+                android:fontFamily="@font/p_med"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/primary"
@@ -40,50 +43,66 @@
                 android:elevation="4sp"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:padding="10dp">
 
                 <TextView
+                    android:fontFamily="@font/p_med"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="NAME: JOHN PAUL BARCINILA"
-                    android:textColor="@color/black"
+
                     android:textStyle="bold"
                     android:id="@+id/tv_name"/>
 
                 <TextView
+                    android:fontFamily="@font/p_med"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="EMAIL: BARCINILLA.363495@cubao.sti.edu.ph"
                     android:singleLine="true"
                     android:ellipsize="end"
-                    android:textColor="@color/black"
+
                     android:textStyle="bold"
                     android:id="@+id/tv_email"/>
 
                 <TextView
+                    android:fontFamily="@font/p_med"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="STUDENT NUMBER: 02000363495"
-                    android:textColor="@color/black"
+
                     android:textStyle="bold"
                     android:id="@+id/tv_studentNumber"/>
 
                 <TextView
+                    android:fontFamily="@font/p_med"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="SECTION: ITM402"
-                    android:textColor="@color/black"
+
                     android:textStyle="bold"
                     android:id="@+id/tv_section"/>
 
             </LinearLayout>
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/primary"
+                android:layout_margin="15dp"
+                android:alpha="0.3"/>
+            <TextView
+                android:fontFamily="@font/p_med"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="STATUS"
                 android:textStyle="bold"
+                android:textColor="@color/primary"
                 android:elevation="4sp"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
@@ -92,6 +111,7 @@
                 android:textSize="20dp" />
 
             <TextView
+                android:fontFamily="@font/p_med"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="NOT ELIGIBLE FOR COMMUNITY SERVICE"
@@ -107,7 +127,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+
                 android:orientation="horizontal"
                 >
                 <LinearLayout
@@ -122,15 +142,17 @@
                     android:layout_weight="1"
                     >
                     <TextView
+                        android:fontFamily="@font/p_med"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/primary"
                         android:textColor="@color/white"
                         android:textStyle="bold"
-                        android:text="NUMBER OF LATE"
+                        android:text="TOTAL NUMBER OF LATE"
                         android:textAlignment="center"/>
 
                     <TextView
+                        android:fontFamily="@font/p_med"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="25dp"
@@ -155,21 +177,25 @@
                     android:layout_weight="1"
                     >
                     <TextView
+                        android:fontFamily="@font/p_med"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="TOTAL HOURS OF LATE"
+                        android:text="TOTAL MINUTES OF LATE"
                         android:background="@color/primary"
                         android:textColor="@color/white"
                         android:textStyle="bold"
                         android:textAlignment="center"/>
 
                     <TextView
+                        android:fontFamily="@font/p_med"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="25dp"
                         android:textStyle="bold"
                         android:textSize="25dp"
-                        android:id="@+id/tv_hoursLate"
+                        android:id="@+id/tv_minuteLate"
                         android:text="20"
                         android:textAlignment="center"/>
 
@@ -186,11 +212,20 @@
                 android:textAlignment="textEnd"/>
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/primary"
+                android:layout_margin="15dp"
+                android:alpha="0.3"/>
+
+            <TextView
+                android:fontFamily="@font/p_med"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="RECENT LATE RECORD"
                 android:textStyle="bold"
                 android:elevation="4sp"
+                android:textColor="@color/primary"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
@@ -199,6 +234,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/p_med"
                 android:layout_width="match_parent"
                 android:id="@+id/rv_lateRecords">
 

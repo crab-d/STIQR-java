@@ -1,5 +1,6 @@
 package com.example.stiqr_java.student.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -13,11 +14,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.stiqr_java.R;
+import com.example.stiqr_java.firebase.LateRecord;
 import com.example.stiqr_java.recyclerview.adapter.LateRecordsAdapter;
-import com.example.stiqr_java.recyclerview.model.LateRecordsModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,43 +64,49 @@ public class StudentHome extends Fragment {
         }
     }
 
+    @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Context context = getContext();
         View view = inflater.inflate(R.layout.fragment_student_home, container, false);
 
-        TextView tv_name, tv_email, tv_studentNumber, tv_section, tv_totalLate;
+        TextView tv_name, tv_email, tv_studentNumber, tv_section, tv_totalLate, tv_minuteLate, tv_status;
         tv_name = view.findViewById(R.id.tv_name);
         tv_email = view.findViewById(R.id.tv_email);
         tv_studentNumber = view.findViewById(R.id.tv_studentNumber);
         tv_section = view.findViewById(R.id.tv_section);
-
+        tv_minuteLate = view.findViewById(R.id.tv_minuteLate);
         tv_totalLate = view.findViewById(R.id.tv_totalLate);
-
+        tv_status = view.findViewById(R.id.tv_status);
         RecyclerView rv_lateRecords = view.findViewById(R.id.rv_lateRecords);
+        LateRecord DB_LATE = new LateRecord(context);
 
-        List<LateRecordsModel> lateRecord = new ArrayList<>();
-        lateRecord.add(new LateRecordsModel("APRIL 12 2025", "ENTREPRENEURSHIP", "CABANIT", "50 MINS", "11:00 AM - 2:00 PM"));
-        lateRecord.add(new LateRecordsModel("APRIL 12 2025", "ENTREPRENEURSHIP", "CABANIT", "50 MINS", "11:00 AM - 2:00 PM"));
-        lateRecord.add(new LateRecordsModel("APRIL 12 2025", "ENTREPRENEURSHIP", "CABANIT", "50 MINS", "11:00 AM - 2:00 PM"));
-
-        String lateCount = String.valueOf(lateRecord.size());
-
-        rv_lateRecords.setLayoutManager(new LinearLayoutManager(context));
-        rv_lateRecords.setAdapter(new LateRecordsAdapter(context, lateRecord));
-
+        assert context != null;
         String name = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_NAME", "NAH");
         String email = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_EMAIL", "NAH");
         String studentNumber = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_NUMBER", "NAH");
         String section = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_SECTION", "NAH");
+        String gradeLevel = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_GRADE", "nah");
 
         tv_name.setText("NAME: " + name);
         tv_email.setText("EMAIL: " + email);
         tv_studentNumber.setText("STUDENT NUMBER: " + studentNumber);
         tv_section.setText("SECTION: " + section);
 
-        tv_totalLate.setText(lateCount);
+
+        rv_lateRecords.setLayoutManager(new LinearLayoutManager(context));
+        DB_LATE.readRecentLate(studentNumber, gradeLevel, section, (LateRecord, MinuteCount) -> {
+            rv_lateRecords.setAdapter(new LateRecordsAdapter(context, LateRecord));
+            String lateCount = String.valueOf(LateRecord.size());
+            tv_totalLate.setText(lateCount);
+            tv_minuteLate.setText(String.valueOf(MinuteCount));
+            DB_LATE.threshold(threshold -> {
+              if (Integer.parseInt(lateCount) >= threshold) {
+                  tv_status.setText("NOTICE: ELIGIBLE FOR COMMUNITY SERVICES COMPLIANCES IS A MUST");
+              }
+            });
+        });
 
         return view;
     }

@@ -19,6 +19,8 @@
                 android:layout_height="wrap_content"
                 android:text="MONDAY"
                 android:textAlignment="center"
+                android:fontFamily="@font/p_med"
+
                 android:textStyle="bold"
                 android:background="@color/primary"
                 android:textColor="@color/white"
@@ -33,6 +35,8 @@
             <TextView
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/p_med"
+
                 android:layout_height="wrap_content"
                 android:text="TUESDAY"
                 android:textAlignment="center"
@@ -50,6 +54,8 @@
             <TextView
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/p_med"
+
                 android:layout_height="wrap_content"
                 android:text="WEDNESDAY"
                 android:textAlignment="center"
@@ -71,6 +77,8 @@
                 android:text="THURSDAY"
                 android:textAlignment="center"
                 android:textStyle="bold"
+                android:fontFamily="@font/p_med"
+
                 android:background="@color/primary"
                 android:textColor="@color/white"
                 android:textSize="20dp"/>
@@ -85,6 +93,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/p_med"
+
                 android:text="FRIDAY"
                 android:textAlignment="center"
                 android:textStyle="bold"
@@ -103,6 +113,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="SATURDAY"
+                android:fontFamily="@font/p_med"
+
                 android:textAlignment="center"
                 android:textStyle="bold"
                 android:background="@color/primary"

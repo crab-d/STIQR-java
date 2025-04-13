@@ -19,15 +19,21 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:fontFamily="@font/p_med"
+                android:textColor="@color/primary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="COMPROG1"
                 android:id="@+id/tv_subject"/>
             <TextView
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
             <TextView
+                android:fontFamily="@font/p_med"
+                android:textStyle="bold"
+                android:textColor="@color/primary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="11:00 AM - 11:30 AM"
@@ -43,6 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MISULA"
+                android:fontFamily="@font/p_med"
                 android:id="@+id/tv_professor"/>
             <TextView
                 android:layout_width="0dp"
@@ -52,6 +59,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="204"
+                android:fontFamily="@font/p_med"
+                android:textStyle="bold"
                 android:id="@+id/tv_room"/>
 
         </LinearLayout>

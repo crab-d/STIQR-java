@@ -28,6 +28,7 @@
             android:layout_weight="1"
             android:id="@+id/tv_home"
             android:clickable="true"
+            android:fontFamily="@font/p_med"
             android:text="HOME"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -38,37 +39,42 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/p_med"
+
             android:text="SCHEDULE"
             android:id="@+id/tv_schedule"
             android:clickable="true"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textAlignment="center"
-            android:drawableTop="@drawable/ic_home"/>
+            android:drawableTop="@drawable/ic_sched"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="SCAN QR"
+            android:fontFamily="@font/p_med"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:id="@+id/tv_scan"
             android:clickable="true"
             android:textAlignment="center"
-            android:drawableTop="@drawable/ic_home"/>
+            android:drawableTop="@drawable/ic_qr"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="RECORDS"
+            android:fontFamily="@font/p_med"
+
             android:textStyle="bold"
             android:textColor="@color/white"
             android:id="@+id/tv_records"
             android:clickable="true"
             android:textAlignment="center"
-            android:drawableTop="@drawable/ic_home"/>
+            android:drawableTop="@drawable/ic_record"/>
 
         <TextView
             android:layout_width="0dp"
@@ -77,10 +83,12 @@
             android:text="LOG OUT"
             android:id="@+id/tv_logout"
             android:clickable="true"
+            android:fontFamily="@font/p_med"
+
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textAlignment="center"
-            android:drawableTop="@drawable/ic_home"/>
+            android:drawableTop="@drawable/ic_logout"/>
 
 
     </LinearLayout>

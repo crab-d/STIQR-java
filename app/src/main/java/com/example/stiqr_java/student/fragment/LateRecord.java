@@ -78,9 +78,8 @@ public class LateRecord extends Fragment {
 
 
         rv_lateRecords.setLayoutManager(new LinearLayoutManager(context));
-        DB_LATE.readLateRecord(studentNumber, gradeLevel, section, lateRecord -> {
-            LateRecordsAdapter RecordAdapter = new LateRecordsAdapter(context, lateRecord);
-            rv_lateRecords.setAdapter(RecordAdapter);
+        DB_LATE.readLateRecord(studentNumber, gradeLevel, section, (lateRecord) -> {
+            rv_lateRecords.setAdapter(new LateRecordsAdapter(context, lateRecord));
             Toast.makeText(context, "size: " + lateRecord.size(), Toast.LENGTH_SHORT).show();
         } );
 

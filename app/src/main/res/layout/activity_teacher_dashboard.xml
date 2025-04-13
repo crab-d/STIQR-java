@@ -29,6 +29,8 @@
             android:id="@+id/tv_home"
             android:clickable="true"
             android:text="HOME"
+            android:fontFamily="@font/p_med"
+
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textAlignment="center"
@@ -39,6 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="SCHEDULE"
+            android:fontFamily="@font/p_med"
+
             android:id="@+id/tv_schedule"
             android:clickable="true"
             android:textStyle="bold"
@@ -50,6 +54,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/p_med"
+
             android:text="RECORDS"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -63,6 +69,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="LOG OUT"
+            android:fontFamily="@font/p_med"
+
             android:id="@+id/tv_logout"
             android:clickable="true"
             android:textStyle="bold"

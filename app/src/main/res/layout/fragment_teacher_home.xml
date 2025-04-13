@@ -18,6 +18,8 @@
             android:orientation="vertical">
 
             <TextView
+                android:fontFamily="@font/p_med"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -41,6 +43,8 @@
                 android:padding="10dp">
 
                 <TextView
+                    android:fontFamily="@font/p_med"
+
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -49,6 +53,8 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:fontFamily="@font/p_med"
+
                     android:id="@+id/tv_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -63,6 +69,8 @@
             </LinearLayout>
 
             <TextView
+                android:fontFamily="@font/p_med"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TEACHER QR"
