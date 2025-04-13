@@ -1,10 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".staff.StaffDashboard">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/frame_staff"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/primary"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/tv_home"
+            android:clickable="true"
+            android:fontFamily="@font/p_med"
+            android:text="HOME"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:drawableTop="@drawable/ic_home"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/p_med"
+            android:text="SEARCH"
+            android:id="@+id/tv_schedule"
+            android:clickable="true"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:drawableTop="@drawable/ic_sched"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="QR"
+            android:fontFamily="@font/p_med"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:id="@+id/tv_scan"
+            android:clickable="true"
+            android:textAlignment="center"
+            android:drawableTop="@drawable/ic_qr"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="RECORDS"
+            android:fontFamily="@font/p_med"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:id="@+id/tv_records"
+            android:clickable="true"
+            android:textAlignment="center"
+            android:drawableTop="@drawable/ic_record"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="LOG OUT"
+            android:id="@+id/tv_logout"
+            android:clickable="true"
+            android:fontFamily="@font/p_med"
+
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:drawableTop="@drawable/ic_logout"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

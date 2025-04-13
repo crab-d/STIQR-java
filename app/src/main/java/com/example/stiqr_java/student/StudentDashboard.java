@@ -12,9 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.stiqr_java.MainActivity;
+import com.example.stiqr_java.LoginActivity;
 import com.example.stiqr_java.R;
-import com.example.stiqr_java.student.fragment.Record.LateRecord;
 import com.example.stiqr_java.student.fragment.Record.RecordParentFrag;
 import com.example.stiqr_java.student.fragment.StudentHome;
 import com.example.stiqr_java.student.fragment.schedule;
@@ -61,7 +60,7 @@ public class StudentDashboard extends AppCompatActivity {
 
         tv_logout.setOnClickListener(v -> {
             getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).edit().clear().apply();
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             overridePendingTransition(0,0);
             startActivity(intent);

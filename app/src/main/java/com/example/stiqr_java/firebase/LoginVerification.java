@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.example.stiqr_java.staff.StaffDashboard;
 import com.example.stiqr_java.student.StudentDashboard;
 import com.example.stiqr_java.teacher.TeacherDashboard;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -18,21 +19,9 @@ public class LoginVerification {
     }
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    public void mondaySchedQuery() {
-        db.collection("schedule").document("");
-    }
-
     public void loginAuthentication(String email, String password, Activity activity) {
 
-        db.collection("staff").whereEqualTo("email", email).whereEqualTo("password", password).get().addOnSuccessListener(query -> {
-           if (!query.isEmpty()) {
-               context.getSharedPreferences("STAFF_SESSION", Context.MODE_PRIVATE).edit()
-                       .putBoolean("STAFF_LOG", true)
-                       .apply();
 
-           }
-        });
 
         db.collection("users").whereEqualTo("email", email).whereEqualTo("password", password).get().addOnSuccessListener(query -> {
             if (!query.isEmpty()) {
@@ -75,6 +64,17 @@ public class LoginVerification {
                         Toast.makeText(context, "Invalid credentials. Please try again.", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+
+        db.collection("staff").whereEqualTo("email", email).whereEqualTo("password", password).get().addOnSuccessListener(query -> {
+            if (!query.isEmpty()) {
+                context.getSharedPreferences("STAFF_SESSION", Context.MODE_PRIVATE).edit()
+                        .putBoolean("STAFF_LOG", true)
+                        .apply();
+                Intent intent = new Intent(context, StaffDashboard.class);
+                context.startActivity(intent);
+                activity.finish();
             }
         });
     }

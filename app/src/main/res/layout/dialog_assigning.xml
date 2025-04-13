@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginEnd="30dp"
+    android:layout_marginStart="30dp"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@color/white"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ASSIGN STUDENT"
+        android:fontFamily="@font/p_med"
+        android:textStyle="bold"
+        android:textColor="@color/primary"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/p_med"
+        android:text="STUDENT INFORMATION"
+        android:textAlignment="center"
+        android:background="@color/primary"
+        android:textColor="@color/white"
+        android:layout_marginTop="5dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="STUDENT NUMBER: 02022032"
+        android:fontFamily="@font/p_med"
+        android:id="@+id/tv_studentNumber"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="STUDENT NAME: johnpaul"
+        android:fontFamily="@font/p_med"
+        android:id="@+id/tv_name"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="REFERENCCE: 323232"
+        android:fontFamily="@font/p_med"
+        android:id="@+id/tv_reference"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/primary"
+        android:layout_margin="15dp"
+        android:alpha="0.3"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter task to be assign"
+        android:background="#f1f1f1"
+        android:singleLine="true"
+        android:padding="5dp"
+        android:paddingStart="10dp"
+        android:id="@+id/et_task"
+        android:textColorHint="#999"
+        android:textColor="#555"
+        android:elevation="4sp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_marginTop="25dp"
+        android:background="@color/primary"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:fontFamily="@font/p_med"
+        android:layout_height="wrap_content"
+        android:text="ASSIGN"
+        android:id="@+id/btn_assign"/>
+
+
+
+
+</LinearLayout>

@@ -6,14 +6,11 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.stiqr_java.MainActivity;
+import com.example.stiqr_java.LoginActivity;
 import com.example.stiqr_java.R;
 import com.example.stiqr_java.teacher.fragment.TeacherHome;
 
@@ -28,7 +25,7 @@ public class TeacherDashboard extends AppCompatActivity {
         tv_logout = findViewById(R.id.tv_logout);
         tv_logout.setOnClickListener(v -> {
             getSharedPreferences("TEACHER_SESSION", MODE_PRIVATE).edit().clear().commit();
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             overridePendingTransition(0,0);

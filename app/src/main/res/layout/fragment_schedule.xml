@@ -30,6 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"
+                android:scrollbarSize="0dp"
+
                 android:id="@+id/rv_monday"/>
 
             <TextView
@@ -49,6 +51,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"
+                android:scrollbarSize="0dp"
+
                 android:id="@+id/rv_tuesday"/>
 
             <TextView
@@ -68,6 +72,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"
+                android:scrollbarSize="0dp"
+
                 android:id="@+id/rv_wednesday"/>
 
             <TextView
@@ -87,6 +93,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"
+                android:scrollbarSize="0dp"
+
                 android:id="@+id/rv_thursday"/>
 
             <TextView
@@ -106,6 +114,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"
+                android:scrollbarSize="0dp"
+
                 android:id="@+id/rv_friday"/>
 
             <TextView
@@ -125,6 +135,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"
+
+                android:scrollbarSize="0dp"
                 android:id="@+id/rv_saturday"/>
 
         </LinearLayout>

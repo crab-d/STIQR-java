@@ -1,26 +1,31 @@
-package com.example.stiqr_java.teacher.fragment;
+package com.example.stiqr_java.staff.fragment;
 
-import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.stiqr_java.R;
+import com.example.stiqr_java.firebase.CSRecord;
+import com.example.stiqr_java.recyclerview.adapter.StaffCSRecordsAdapter;
 import com.example.stiqr_java.teacher.TeacherQR;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link TeacherHome#newInstance} factory method to
+ * Use the {@link StaffHome#newInstance} factory method to
  * create an instance of this fragment.
- *
  */
-public class TeacherHome extends Fragment {
+public class StaffHome extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,26 +36,26 @@ public class TeacherHome extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    public StaffHome() {
+        // Required empty public constructor
+    }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment TeacherHome.
+     * @return A new instance of fragment StaffHome.
      */
     // TODO: Rename and change types and number of parameters
-    public static TeacherHome newInstance(String param1, String param2) {
-        TeacherHome fragment = new TeacherHome();
+    public static StaffHome newInstance(String param1, String param2) {
+        StaffHome fragment = new StaffHome();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public TeacherHome() {
-        // Required empty public constructor
     }
 
     @Override
@@ -62,30 +67,25 @@ public class TeacherHome extends Fragment {
         }
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_teacher_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_staff_home, container, false);
         Context context = getContext();
+        CSRecord DB_CS = new CSRecord(context);
+        RecyclerView rv_recent = view.findViewById(R.id.rv_recent);
 
-        TextView tv_name = view.findViewById(R.id.tv_name);
-        TextView tv_email = view.findViewById(R.id.tv_email);
+        Activity activity = getActivity();
+        rv_recent.setLayoutManager(new LinearLayoutManager(context));
+        DB_CS.readLimitRecord(record -> {
+            rv_recent.setAdapter(new StaffCSRecordsAdapter(context, record, activity));
+            Toast.makeText(context, "size: " + record.size(), Toast.LENGTH_SHORT).show();
+        });
 
-        assert context != null;
-        String name = context.getSharedPreferences("TEACHER_SESSION", Context.MODE_PRIVATE).getString("TEACHER_NAME", "NAH");
-        String teacherEmail = context.getSharedPreferences("TEACHER_SESSION", Context.MODE_PRIVATE).getString("TEACHER_EMAIL", "NAH");
+        Toast.makeText(context, "size: " , Toast.LENGTH_SHORT).show();
 
-        tv_name.setText("NAME: " + name);
-        tv_email.setText("EMAIL: " + teacherEmail);
-        ImageView im_qr = view.findViewById(R.id.im_qr);
 
-        Bitmap qrBitmap = TeacherQR.generateQRCode(teacherEmail, 900, 900);
-
-        if (qrBitmap != null) {
-            im_qr.setImageBitmap(qrBitmap);
-        }
         return view;
     }
 }
