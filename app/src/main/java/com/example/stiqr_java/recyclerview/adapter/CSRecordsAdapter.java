@@ -1,6 +1,7 @@
 package com.example.stiqr_java.recyclerview.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +33,16 @@ public class CSRecordsAdapter extends RecyclerView.Adapter<CSRecordsAdapter.CSRe
 
     @Override
     public void onBindViewHolder(@NonNull CSRecordsHolder holder, int position) {
+        String status = CSRecord.get(position).getStatus();
         holder.tv_reference.setText("REFERENCE: " + CSRecord.get(position).getReference());
-        holder.tv_status.setText("STATUS: " + CSRecord.get(position).getStatus());
+        holder.tv_status.setText("STATUS: " + status);
+        if (status.equals("To be process")) {
+            holder.tv_status.setTextColor(Color.parseColor("#D76E03"));
+        } else if (status.equals("on going")) {
+            holder.tv_status.setTextColor(Color.parseColor("#3283FF"));
+        } else if (status.equals("complete")) {
+            holder.tv_status.setTextColor(Color.parseColor("#3CFF28"));
+        }
         holder.tv_task.setText("TASK: " + CSRecord.get(position).getTask());
         holder.tv_date.setText("DATE COMPLIED: " + CSRecord.get(position).getCompleteDate());
     }

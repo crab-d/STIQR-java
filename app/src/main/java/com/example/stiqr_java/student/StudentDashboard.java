@@ -3,7 +3,6 @@ package com.example.stiqr_java.student;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
@@ -14,11 +13,16 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.stiqr_java.LoginActivity;
 import com.example.stiqr_java.R;
+import com.example.stiqr_java.firebase.CSRecord;
 import com.example.stiqr_java.student.fragment.Record.RecordParentFrag;
 import com.example.stiqr_java.student.fragment.StudentHome;
 import com.example.stiqr_java.student.fragment.schedule;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class StudentDashboard extends AppCompatActivity {
     TextView tv_home, tv_schedule, tv_records, tv_logout, tv_scan;
@@ -37,8 +41,8 @@ public class StudentDashboard extends AppCompatActivity {
         DB_LATELOG = new com.example.stiqr_java.firebase.LateRecord(this);
 
 
+
         String gradeLevel = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_GRADE", "nAH");
-        Toast.makeText(this, "grade" + gradeLevel, Toast.LENGTH_SHORT).show();
 
         tv_records.setOnClickListener(v -> {
             loadFragment(new RecordParentFrag());
@@ -62,8 +66,9 @@ public class StudentDashboard extends AppCompatActivity {
             getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).edit().clear().apply();
             Intent intent = new Intent(this, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            overridePendingTransition(0,0);
+            overridePendingTransition(0, 0);
             startActivity(intent);
+            finish();
         });
     }
 
@@ -77,17 +82,58 @@ public class StudentDashboard extends AppCompatActivity {
     }
 
 
+    //not tested
+    //Contrac/taskt for each success scan
     ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result -> {
-       if (result.getContents() != null) {
-           String name = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_NAME", "NAH");
-           String section = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_SECTION", "NAH");
-           String gradeLevel = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_GRADE", "NAH");
-           String teacherEmail = result.getContents();
-           String studentNumber = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_NUMBER", "NAH");
 
-           DB_LATELOG.addLateStudent(name, section, gradeLevel, teacherEmail, studentNumber);
-           Toast.makeText(this, "res: " + result.getContents() , Toast.LENGTH_SHORT).show();
-       }
+        //check if qr has val
+        if (result.getContents() != null) {
+            String name = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_NAME", "NAH");
+            String section = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_SECTION", "NAH");
+            String gradeLevel = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_GRADE", "NAH");
+            String teacherEmail = result.getContents();
+            String studentNumber = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_NUMBER", "NAH");
+
+
+            DB_LATELOG.readLateRecord(studentNumber, gradeLevel, section, (lateRecord, hi) -> {
+                int lateCount = lateRecord.size();
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                DocumentReference userDoc = db.collection("users").document(studentNumber);
+
+                //if qr is from admin, who assign student task for cs
+                 if (result.getContents().equals("DisciplinaryOfficer")) {
+
+                     userDoc.get().addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            Long newCount = documentSnapshot.getLong("deductCounter");
+                            assert newCount != null;
+                            AtomicInteger deductCounter = new AtomicInteger(newCount.intValue());
+
+                            if (lateCount > deductCounter.get()) {
+                                CSRecord DB_CS = new CSRecord(this);
+                                //retrieve threshold
+                                DB_CS.threshold(threshold -> {
+                                    if (threshold == 0) {
+                                        return;
+                                    }
+
+                                    while (lateCount > deductCounter.get()) {
+                                        DB_CS.addCSRecord(name, studentNumber);
+                                        deductCounter.addAndGet(threshold);
+                                        userDoc.update("deductCounter", deductCounter.get());
+                                    }
+                                });
+
+                            }
+                        }
+                     });
+                 //if qr from teacher, just add new late record
+                 } else {
+                     DB_LATELOG.addLateStudent(name, section, gradeLevel, teacherEmail, studentNumber);
+                 }
+
+            });
+        }
     });
 
     private void loadFragment(Fragment fragment) {

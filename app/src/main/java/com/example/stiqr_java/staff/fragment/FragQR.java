@@ -67,7 +67,7 @@ public class FragQR extends Fragment {
         View view = inflater.inflate(R.layout.fragment_frag_q_r, container, false);
         ImageView im_qr = view.findViewById(R.id.iv_qr);
 
-        Bitmap qrBitmap = TeacherQR.generateQRCode("DiciplinaryOfficer", 900, 900);
+        Bitmap qrBitmap = TeacherQR.generateQRCode("DisciplinaryOfficer", 900, 900);
 
         if (qrBitmap != null) {
             im_qr.setImageBitmap(qrBitmap);

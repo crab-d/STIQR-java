@@ -15,10 +15,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.stiqr_java.LoginActivity;
 import com.example.stiqr_java.R;
+import com.example.stiqr_java.staff.fragment.FragQR;
 import com.example.stiqr_java.staff.fragment.StaffHome;
 
 public class StaffDashboard extends AppCompatActivity {
-    TextView tv_logout;
+    TextView tv_logout, tv_scan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,11 @@ public class StaffDashboard extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_staff_dashboard);
         tv_logout = findViewById(R.id.tv_logout);
+        tv_scan = findViewById(R.id.tv_scan);
 
+        tv_scan.setOnClickListener(v -> {
+            loadFragment(new FragQR());
+        });
         loadFragment(new StaffHome());
 
         tv_logout.setOnClickListener(v -> {

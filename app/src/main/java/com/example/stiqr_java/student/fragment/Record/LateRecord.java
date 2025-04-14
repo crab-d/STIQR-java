@@ -80,7 +80,7 @@ public class LateRecord extends Fragment {
         String section = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_SECTION", "NAG");
 
         rv_lateRecords.setLayoutManager(new LinearLayoutManager(context));
-        DB_LATE.readLateRecord(studentNumber, gradeLevel, section, (lateRecord) -> {
+        DB_LATE.readLateRecord(studentNumber, gradeLevel, section, (lateRecord, hi) -> {
             rv_lateRecords.setAdapter(new LateRecordsAdapter(context, lateRecord));
         } );
 

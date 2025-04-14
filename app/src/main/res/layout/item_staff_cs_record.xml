@@ -1,66 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:elevation="4dp"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:background="@color/primary"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:id="@+id/tv_reference"
-        android:text="REFERENCE: T2Y2425-1001"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:fontFamily="@font/p_med"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
         android:elevation="4dp"
-        android:layout_marginBottom="5dp"
-        android:padding="5dp"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="STUDENT NUMBER: 02003031"
-            android:fontFamily="@font/p_med"
-            android:id="@+id/tv_studentNumber"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="STUDENT NAME: JOHN PAUL BARCINILLA"
-            android:fontFamily="@font/p_med"
-            android:id="@+id/tv_name"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="STATUS: TO BE ASSIGNNED"
-            android:fontFamily="@font/p_med"
-            android:id="@+id/tv_status"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="TASK: LIBRARY HELPER"
-            android:fontFamily="@font/p_med"
-            android:id="@+id/tv_task"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="COMPLETE DATE: ---"
-            android:fontFamily="@font/p_med"
-            android:id="@+id/tv_date"/>
 
+
+        <TextView
+            android:id="@+id/tv_reference"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@color/primary"
+            android:fontFamily="@font/p_med"
+            android:padding="5dp"
+            android:text="REFERENCE: T2Y2425-1001"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/tv_studentNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/p_med"
+                android:text="STUDENT NUMBER: 02003031"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/p_med"
+                android:text="STUDENT NAME: JOHN PAUL BARCINILLA"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/p_med"
+                android:text="STATUS: TO BE ASSIGNNED"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/p_med"
+                android:text="TASK: LIBRARY HELPER"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/p_med"
+                android:text="COMPLETE DATE: ---"
+                android:textStyle="bold" />
+
+        </LinearLayout>
     </LinearLayout>
 
 

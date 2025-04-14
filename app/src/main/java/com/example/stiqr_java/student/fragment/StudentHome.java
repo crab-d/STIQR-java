@@ -18,6 +18,8 @@ import com.example.stiqr_java.firebase.CSRecord;
 import com.example.stiqr_java.firebase.LateRecord;
 import com.example.stiqr_java.recyclerview.adapter.LateRecordsAdapter;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link StudentHome#newInstance} factory method to
@@ -33,6 +35,7 @@ public class StudentHome extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private View view;
 
     public StudentHome() {
         // Required empty public constructor
@@ -72,7 +75,7 @@ public class StudentHome extends Fragment {
         Context context = getContext();
         View view = inflater.inflate(R.layout.fragment_student_home, container, false);
 
-        TextView tv_name, tv_email, tv_studentNumber, tv_section, tv_totalLate, tv_minuteLate, tv_status;
+        TextView tv_name, tv_email, tv_studentNumber, tv_section, tv_totalLate, tv_minuteLate, tv_status, tv_totalCS, tv_csPending, tv_csOnGoing, tv_csComplete;
         tv_name = view.findViewById(R.id.tv_name);
         tv_email = view.findViewById(R.id.tv_email);
         tv_studentNumber = view.findViewById(R.id.tv_studentNumber);
@@ -80,9 +83,12 @@ public class StudentHome extends Fragment {
         tv_minuteLate = view.findViewById(R.id.tv_minuteLate);
         tv_totalLate = view.findViewById(R.id.tv_totalLate);
         tv_status = view.findViewById(R.id.tv_status);
+        tv_totalCS = view.findViewById(R.id.tv_totalCS);
+        tv_csPending = view.findViewById(R.id.tv_csPending);
+        tv_csOnGoing = view.findViewById(R.id.tv_csOnGoing);
+        tv_csComplete = view.findViewById(R.id.tv_csComplete);
         RecyclerView rv_lateRecords = view.findViewById(R.id.rv_lateRecords);
         LateRecord DB_LATE = new LateRecord(context);
-
 
 
         assert context != null;
@@ -100,18 +106,59 @@ public class StudentHome extends Fragment {
         tv_studentNumber.setText("STUDENT NUMBER: " + studentNumber);
         tv_section.setText("SECTION: " + section);
 
+        CSRecord DB_CS = new CSRecord(context);
+        DB_CS.readStudentCS(studentNumber, totalCS -> {
+            tv_totalCS.setText(String.valueOf(totalCS.size()));
+        });
+
+        DB_CS.readPendingCS(studentNumber, totalPending -> {
+            if (!totalPending.isEmpty()) {
+                tv_csPending.setText(String.valueOf(totalPending.size()));
+            } else {
+                tv_csPending.setText("0");
+            }
+        });
+
+        DB_CS.readOnGoingCS(studentNumber, totalOnGoing -> {
+            if (!totalOnGoing.isEmpty()) {
+                tv_csOnGoing.setText(String.valueOf(totalOnGoing.size()));
+            } else {
+                tv_csOnGoing.setText("0");
+
+            }
+        });
+        DB_CS.readCompleteCS(studentNumber, totalComplete -> {
+            if (!totalComplete.isEmpty()) {
+                tv_csComplete.setText(String.valueOf(totalComplete.size()));
+            } else {
+                tv_csComplete.setText("0");
+
+            }
+        });
+
+
+        DB_LATE.readLateRecord(studentNumber, gradeLevel, section, (record, totalMinute) -> {
+            tv_totalLate.setText(String.valueOf(record.size()));
+            tv_minuteLate.setText(String.valueOf(totalMinute));
+            AtomicInteger deduct = new AtomicInteger(context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getInt("STUDENT_DEDUCT", 0));
+            int eligibilityChecker = record.size() - deduct.get();
+            DB_LATE.threshold(threshold -> {
+                if (eligibilityChecker >= threshold) {
+                    if (record.size() >= deduct.get()) {
+                        tv_status.setText("NOTICE: ELIGIBLE FOR COMMUNITY SERVICES COMPLIANCES IS A MUST PLEASE SCAN DISCIPLINARY OFFICER QR");
+                        deduct.addAndGet(threshold);
+                        context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).edit().putInt("STUDENT_DEDUCT", deduct.get()).apply();
+                    }
+                }
+            });
+        });
+
 
         rv_lateRecords.setLayoutManager(new LinearLayoutManager(context));
-        DB_LATE.readRecentLate(studentNumber, gradeLevel, section, (LateRecord, MinuteCount) -> {
+        DB_LATE.readRecentLate(studentNumber, gradeLevel, section, (LateRecord) -> {
             rv_lateRecords.setAdapter(new LateRecordsAdapter(context, LateRecord));
-            String lateCount = String.valueOf(LateRecord.size());
-            tv_totalLate.setText(lateCount);
-            tv_minuteLate.setText(String.valueOf(MinuteCount));
-            DB_LATE.threshold(threshold -> {
-              if (Integer.parseInt(lateCount) >= threshold) {
-                  tv_status.setText("NOTICE: ELIGIBLE FOR COMMUNITY SERVICES COMPLIANCES IS A MUST");
-              }
-            });
+
+
         });
 
         return view;
