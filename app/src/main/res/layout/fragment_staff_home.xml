@@ -17,11 +17,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="STI QR Super Admin Panel"
+                android:text="@string/sti_qr_super_admin_panel"
                 android:textStyle="bold"
                 android:textColor="@color/primary"
                 android:fontFamily="@font/p_med"
-                android:textSize="20dp"/>
+                android:textSize="20sp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -33,12 +33,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="RECORD"
+                android:text="@string/record"
                 android:textStyle="bold"
                 android:fontFamily="@font/p_med"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:baselineAligned="false"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
 
@@ -52,7 +53,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="TOTAL VIOLATORS"
+                        android:text="TOTAL RECORD"
                         android:background="@color/primary"
                         android:textColor="@color/white"
                         android:textStyle="bold"
@@ -61,10 +62,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="23"
+                        android:text="0"
+                        android:textSize="25dp"
+                        android:fontFamily="@font/p_med"
+                        android:textStyle="bold"
+                        android:background="#f1f1f1"
+                        android:elevation="5dp"
                         android:textAlignment="center"
                         android:padding="30dp"
-                        android:id="@+id/tv_totalViolators"/>
+                        android:id="@+id/tv_totalRecord"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -86,7 +92,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="23"
+                        android:text="0"
+                        android:textSize="25dp"
+                        android:fontFamily="@font/p_med"
+                        android:textStyle="bold"
+                        android:background="#f1f1f1"
+                        android:elevation="5dp"
                         android:textAlignment="center"
                         android:padding="30dp"
                         android:id="@+id/tv_pending"/>
@@ -119,7 +130,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="23"
+                        android:text="0"
+                        android:textSize="25dp"
+                        android:fontFamily="@font/p_med"
+                        android:textStyle="bold"
+                        android:background="#f1f1f1"
+                        android:elevation="5dp"
                         android:textAlignment="center"
                         android:padding="30dp"
                         android:id="@+id/tv_onGoing"/>
@@ -144,7 +160,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="23"
+                        android:text="0"
+                        android:textSize="25dp"
+                        android:fontFamily="@font/p_med"
+                        android:textStyle="bold"
+                        android:background="#f1f1f1"
+                        android:elevation="5dp"
                         android:textAlignment="center"
                         android:padding="30dp"
                         android:id="@+id/tv_complete"/>
@@ -170,7 +191,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:id="@+id/rv_recent"/>
 
         </LinearLayout>

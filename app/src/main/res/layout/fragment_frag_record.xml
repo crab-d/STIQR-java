@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".teacher.fragment.FragRecord">
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STUDENT LATE RECORD"
+            android:textColor="@color/primary"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:fontFamily="@font/p_med"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:padding="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/primary"
+                android:textColor="@color/white"
+                android:text="GRADE 12"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:layout_marginEnd="25dp"
+                android:id="@+id/tv_grade12"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:background="@color/white"
+                android:textColor="@color/primary"
+                android:text="GRADE 11"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:id="@+id/tv_grade11"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/primary"
+            android:layout_margin="15dp"
+            android:alpha="0.3"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_lateRecord"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </LinearLayout>
+
+</FrameLayout>

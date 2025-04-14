@@ -27,12 +27,12 @@ import java.util.List;
 public class StaffCSRecordsAdapter extends RecyclerView.Adapter<StaffCSRecordsAdapter.staffCSRecordsHolder> {
     Context context;
     List<StaffCSRecordModel> record;
-    Activity activity;
-    public StaffCSRecordsAdapter(Context context, List<StaffCSRecordModel> record, Activity activity) {
+
+    public StaffCSRecordsAdapter(Context context, List<StaffCSRecordModel> record) {
         super();
         this.context = context;
         this.record = record;
-        this.activity = activity;
+
     }
 
     @Override
@@ -77,9 +77,6 @@ public class StaffCSRecordsAdapter extends RecyclerView.Adapter<StaffCSRecordsAd
 
                 CSRecord DB_CS = new CSRecord(context);
                 DB_CS.assignStudent(record.get(position).getReference(), task);
-                Intent intent = new Intent(context, StaffDashboard.class);
-                context.startActivity(intent);
-                activity.finish();
                 dialog.dismiss();
             });
             dialog.show();

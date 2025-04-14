@@ -15,6 +15,9 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".staff.StudentInfo"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -32,14 +35,15 @@
         <activity
             android:name=".student.StudentDashboard"
             android:exported="false" />
+        <activity android:name=".SignupActivity"
+            android:theme="@style/Base.Theme.STIQRJAVA"
+            android:exported="false"/>
         <activity
             android:name=".student.CaptureActivity"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
             tools:ignore="DiscouragedApi" />
-        <activity
-            android:name=".LoginActivity">
-        </activity>
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>

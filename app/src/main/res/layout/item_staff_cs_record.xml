@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
+    android:background="#f1f1f1"
     android:elevation="4dp"
     android:orientation="vertical">
 
@@ -49,6 +50,7 @@
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:fontFamily="@font/p_med"
                 android:text="STUDENT NAME: JOHN PAUL BARCINILLA"
                 android:textStyle="bold" />
@@ -65,6 +67,7 @@
                 android:id="@+id/tv_task"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:fontFamily="@font/p_med"
                 android:text="TASK: LIBRARY HELPER"
                 android:textStyle="bold" />

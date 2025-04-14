@@ -12,10 +12,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.stiqr_java.LoginActivity;
 import com.example.stiqr_java.R;
+import com.example.stiqr_java.teacher.fragment.FragRecord;
 import com.example.stiqr_java.teacher.fragment.TeacherHome;
 
 public class TeacherDashboard extends AppCompatActivity {
-    TextView tv_logout;
+    TextView tv_logout, tv_records, tv_home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,8 @@ public class TeacherDashboard extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_teacher_dashboard);
         tv_logout = findViewById(R.id.tv_logout);
+        tv_records = findViewById(R.id.tv_records);
+        tv_home = findViewById(R.id.tv_home);
         tv_logout.setOnClickListener(v -> {
             getSharedPreferences("TEACHER_SESSION", MODE_PRIVATE).edit().clear().commit();
             Intent intent = new Intent(this, LoginActivity.class);
@@ -32,6 +35,13 @@ public class TeacherDashboard extends AppCompatActivity {
             finish();
         });
 
+        tv_home.setOnClickListener(v -> {
+            loadFragment(new TeacherHome());
+        });
+
+        tv_records.setOnClickListener(v -> {
+            loadFragment(new FragRecord());
+        });
 
         loadFragment(new TeacherHome());
     }

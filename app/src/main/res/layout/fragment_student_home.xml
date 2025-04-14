@@ -154,7 +154,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="25dp"
-
+                        android:text="0"
                         android:textSize="25dp"
                         android:id="@+id/tv_totalLate"
                         android:textStyle="bold"
@@ -194,7 +194,7 @@
                         android:textStyle="bold"
                         android:textSize="25dp"
                         android:id="@+id/tv_minuteLate"
-
+                        android:text="0"
                         android:textAlignment="center"/>
 
                 </LinearLayout>
@@ -229,7 +229,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="25dp"
-
+                        android:text="0"
                         android:textSize="25dp"
                         android:id="@+id/tv_totalCS"
                         android:textStyle="bold"
@@ -261,7 +261,7 @@
 
                     <TextView
                         android:fontFamily="@font/p_med"
-
+                        android:text="0"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="25dp"
@@ -301,7 +301,7 @@
                         android:textStyle="bold"
                         android:textSize="25dp"
                         android:id="@+id/tv_csOnGoing"
-
+                        android:text="0"
                         android:textAlignment="center"/>
 
                 </LinearLayout>

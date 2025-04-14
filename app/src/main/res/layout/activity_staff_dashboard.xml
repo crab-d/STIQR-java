@@ -41,7 +41,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/p_med"
             android:text="SEARCH"
-            android:id="@+id/tv_schedule"
+            android:id="@+id/tv_search"
             android:clickable="true"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -56,23 +56,10 @@
             android:fontFamily="@font/p_med"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:id="@+id/tv_scan"
+            android:id="@+id/tv_qr"
             android:clickable="true"
             android:textAlignment="center"
             android:drawableTop="@drawable/ic_qr"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="RECORDS"
-            android:fontFamily="@font/p_med"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:id="@+id/tv_records"
-            android:clickable="true"
-            android:textAlignment="center"
-            android:drawableTop="@drawable/ic_record"/>
 
         <TextView
             android:layout_width="0dp"

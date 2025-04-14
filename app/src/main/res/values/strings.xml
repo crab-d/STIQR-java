@@ -2,4 +2,8 @@
     <string name="app_name">STIQR-JAVA</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sti_qr_super_admin_panel">STI QR Super Admin Panel</string>
+    <string name="record">RECORD</string>
+    <string name="total_violators">TOTAL VIOLATORS</string>
+    <string name="_23">23</string>
 </resources>

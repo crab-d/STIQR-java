@@ -40,22 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SCHEDULE"
             android:fontFamily="@font/p_med"
-
-            android:id="@+id/tv_schedule"
-            android:clickable="true"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            android:drawableTop="@drawable/ic_home"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/p_med"
-
             android:text="RECORDS"
             android:textStyle="bold"
             android:textColor="@color/white"

@@ -44,7 +44,7 @@ public class CSRecordsAdapter extends RecyclerView.Adapter<CSRecordsAdapter.CSRe
             holder.tv_status.setTextColor(Color.parseColor("#3CFF28"));
         }
         holder.tv_task.setText("TASK: " + CSRecord.get(position).getTask());
-        holder.tv_date.setText("DATE COMPLIED: " + CSRecord.get(position).getCompleteDate());
+        holder.tv_date.setText("COMPLETE DATE: " + CSRecord.get(position).getCompleteDate());
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.example.stiqr_java.firebase;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.example.stiqr_java.recyclerview.model.LateRecordAllModel;
 import com.example.stiqr_java.recyclerview.model.LateRecordsModel;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldPath;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class LateRecord {
 
@@ -27,6 +29,59 @@ public class LateRecord {
 
     public LateRecord(Context context) {
         this.context = context;
+    }
+
+    //grade 12
+    public void readAllRecord(String docname, String teacherEmail, String gradeLevel, lateRecordCallBack callback) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        ArrayList<String> sectionList = new ArrayList<>();
+        db.collection("teachers").document(docname).collection("class").get().addOnSuccessListener(QueryDocumentSnapshot -> {
+           if (!QueryDocumentSnapshot.isEmpty()) {
+
+               //get all section they handle
+               for (DocumentSnapshot sectionDoc : QueryDocumentSnapshot) {
+                    sectionList.add(sectionDoc.getId());
+               }
+
+               List<LateRecordAllModel> LateAll = new ArrayList<>();
+
+               final int[] completedCount = {0};
+               //loop per each section they handle
+               for (String section : sectionList) {
+                   //loop condtion to change section after all violators been retrive and save to model
+                   db.collection("lateRecords").document(gradeLevel).collection(section).whereEqualTo("teacherEmail", teacherEmail).orderBy(FieldPath.documentId(), Query.Direction.DESCENDING).get().addOnSuccessListener(QueryDocumentSnapshot2 -> {
+
+                       if (!QueryDocumentSnapshot2.isEmpty()) {
+                          //retrive all violators from this section
+                          for (DocumentSnapshot violatorDoc : QueryDocumentSnapshot2) {
+                              String lateArrival = violatorDoc.getString("lateArrival");
+                              String date = violatorDoc.getString("date");
+                              String subject = violatorDoc.getString("subject");
+                              String schedule = violatorDoc.getString("schedule");
+                              String name = violatorDoc.getString("name");
+                              String section1 = violatorDoc.getString("section");
+                              LateAll.add(new LateRecordAllModel(lateArrival, date, subject, schedule, name, section1));
+                          }
+                      }
+                       completedCount[0]++;
+                       if (completedCount[0] == sectionList.size()) {
+                            if (!LateAll.isEmpty()) {
+                                callback.onCallBack(LateAll);
+                            } else {
+                                LateAll.add(new LateRecordAllModel("NO LATE RECORD", " ", " ", " ", " ", " "));
+                            }
+                       }
+                   });
+               }
+
+           } else {
+               Toast.makeText(context, "EMPTY CLASS", Toast.LENGTH_SHORT).show();
+           }
+        });
+    }
+
+    public interface lateRecordCallBack{
+        void onCallBack(List<LateRecordAllModel> lateAll);
     }
 
     public void readLateRecord(String studentNumber, String gradeLevel, String section, recordCallBack callBackRecord) {
@@ -149,6 +204,7 @@ public class LateRecord {
                             violatorData.put("name", name);
                             violatorData.put("schedule", schedule);
                             violatorData.put("section", section);
+                            violatorData.put("teacherEmail", teacherEmail);
                             violatorData.put("studentNumber", studentNumber);
                             violatorData.put("subject", subject);
                             violatorData.put("teacher", teacher);

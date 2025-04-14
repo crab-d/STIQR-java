@@ -1,7 +1,6 @@
 package com.example.stiqr_java.firebase;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.example.stiqr_java.recyclerview.adapter.ScheduleAdapter;
 import com.example.stiqr_java.recyclerview.model.ScheduleModel;
@@ -33,7 +32,7 @@ public class StudentSchedule {
                             schedule.add(new ScheduleModel(subject, professor, time, room));
                         }
                     } else {
-                        schedule.add(new ScheduleModel("NO SCHEDULE", "", "MONDAY", ""));
+                        schedule.add(new ScheduleModel("NO SCHEDULE", "or database isn't updated", "MONDAY", ""));
                     }
                     callback.onScheduleLoaded(schedule);
                 });
@@ -52,7 +51,7 @@ public class StudentSchedule {
                             schedule.add(new ScheduleModel(subject, professor, time, room));
                         }
                     } else {
-                        schedule.add(new ScheduleModel("NO SCHEDULE", "", "TUESDAY", ""));
+                        schedule.add(new ScheduleModel("NO SCHEDULE", "or database isn't updated", "TUESDAY", ""));
                     }
                     callback.onScheduleLoaded(schedule);
                 });
@@ -71,7 +70,7 @@ public class StudentSchedule {
                             schedule.add(new ScheduleModel(subject, professor, time, room));
                         }
                     } else {
-                        schedule.add(new ScheduleModel("NO SCHEDULE", "", "WEDNESDAY", ""));
+                        schedule.add(new ScheduleModel("NO SCHEDULE", "or database isn't updated", "WEDNESDAY", ""));
                     }
                     callback.onScheduleLoaded(schedule);
                 });
@@ -90,7 +89,7 @@ public class StudentSchedule {
                             schedule.add(new ScheduleModel(subject, professor, time, room));
                         }
                     } else {
-                        schedule.add(new ScheduleModel("NO SCHEDULE", "", "THURSDAY", ""));
+                        schedule.add(new ScheduleModel("NO SCHEDULE", "or database isn't updated", "THURSDAY", ""));
                     }
                     callback.onScheduleLoaded(schedule);
                 });
@@ -109,7 +108,7 @@ public class StudentSchedule {
                             schedule.add(new ScheduleModel(subject, professor, time, room));
                         }
                     } else {
-                        schedule.add(new ScheduleModel("NO SCHEDULE", "", "FRIDAY", ""));
+                        schedule.add(new ScheduleModel("NO SCHEDULE", "or database isn't updated", "FRIDAY", ""));
                     }
                     callback.onScheduleLoaded(schedule);
                 });
@@ -128,7 +127,7 @@ public class StudentSchedule {
                             schedule.add(new ScheduleModel(subject, professor, time, room));
                         }
                     } else {
-                        schedule.add(new ScheduleModel("NO SCHEDULE", "", "SATURDAY", ""));
+                        schedule.add(new ScheduleModel("NO SCHEDULE", "or database isn't updated", "SATURDAY", ""));
                     }
                     callback.onScheduleLoaded(schedule);
                 });

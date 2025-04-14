@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:elevation="4dp"
+    android:background="#f1f1f1"
     android:orientation="vertical">
 
     <LinearLayout
@@ -61,13 +62,6 @@
                 android:text="COMPLETE DATE: ---"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/p_med"
-                android:text="NOTE: FAILURE TO COMPLY MAY RESULT TO GRADE DEDUCTION"
-                android:textSize="10sp"
-                android:textStyle="italic" />
 
         </LinearLayout>
     </LinearLayout>

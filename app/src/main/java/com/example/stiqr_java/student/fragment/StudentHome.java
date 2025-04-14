@@ -75,7 +75,7 @@ public class StudentHome extends Fragment {
         Context context = getContext();
         View view = inflater.inflate(R.layout.fragment_student_home, container, false);
 
-        TextView tv_name, tv_email, tv_studentNumber, tv_section, tv_totalLate, tv_minuteLate, tv_status, tv_totalCS, tv_csPending, tv_csOnGoing, tv_csComplete;
+        TextView tv_name, tv_email, tv_studentNumber, tv_section, tv_totalLate, tv_minuteLate, tv_status, tv_totalCS, tv_csPending, tv_csOnGoing, tv_csComplete, tv_semester;
         tv_name = view.findViewById(R.id.tv_name);
         tv_email = view.findViewById(R.id.tv_email);
         tv_studentNumber = view.findViewById(R.id.tv_studentNumber);
@@ -86,10 +86,14 @@ public class StudentHome extends Fragment {
         tv_totalCS = view.findViewById(R.id.tv_totalCS);
         tv_csPending = view.findViewById(R.id.tv_csPending);
         tv_csOnGoing = view.findViewById(R.id.tv_csOnGoing);
+        tv_semester = view.findViewById(R.id.tv_semester);
         tv_csComplete = view.findViewById(R.id.tv_csComplete);
         RecyclerView rv_lateRecords = view.findViewById(R.id.rv_lateRecords);
         LateRecord DB_LATE = new LateRecord(context);
 
+        String semester = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("SEMESTER", "sem2");
+        if (semester.equalsIgnoreCase("sem1")) { tv_semester.setText("SEM 1"); }
+        else { tv_semester.setText("SEM 2"); }
 
         assert context != null;
         String name = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_NAME", "NAH");
@@ -97,9 +101,6 @@ public class StudentHome extends Fragment {
         String studentNumber = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_NUMBER", "NAH");
         String section = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_SECTION", "NAH");
         String gradeLevel = context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getString("STUDENT_GRADE", "nah");
-
-//        CSRecord DB_CS = new CSRecord(context);
-//        DB_CS.addCSRecord(name, studentNumber);
 
         tv_name.setText("NAME: " + name);
         tv_email.setText("EMAIL: " + email);

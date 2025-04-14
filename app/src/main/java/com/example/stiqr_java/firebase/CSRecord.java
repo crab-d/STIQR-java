@@ -1,15 +1,21 @@
 package com.example.stiqr_java.firebase;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.stiqr_java.recyclerview.model.CSModel;
+import com.example.stiqr_java.recyclerview.model.StaffCSOnGoingModel;
 import com.example.stiqr_java.recyclerview.model.StaffCSRecordModel;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +49,7 @@ public class CSRecord {
                 });
     }
 
+    //student
     public void readPendingCS(String studentNumber, recordCSCallback CB_recordCS) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         List<CSModel> CSRecord = new ArrayList<>();
@@ -62,6 +69,7 @@ public class CSRecord {
                 });
     }
 
+    //student
     public void readOnGoingCS(String studentNumber, recordCSCallback CB_recordCS) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         List<CSModel> CSRecord = new ArrayList<>();
@@ -81,6 +89,7 @@ public class CSRecord {
                 });
     }
 
+    //complete
     public void readCompleteCS(String studentNumber, recordCSCallback CB_recordCS) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         List<CSModel> CSRecord = new ArrayList<>();
@@ -121,8 +130,117 @@ public class CSRecord {
                             String reference = document.getString("reference");
                             staffCSRecord.add(new StaffCSRecordModel(reference, studentNumber, name, status, task, date));
                         }
-                    } else {
-                        Toast.makeText(context, "NO RECORD", Toast.LENGTH_SHORT).show();
+                    }
+                    CB_recordCS.onCallBack(staffCSRecord);
+                });
+
+    }
+
+    public void readALLCS(staffRecordCallBack CB_recordCS) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("csRecords").orderBy(FieldPath.documentId(), Query.Direction.DESCENDING)
+                .addSnapshotListener((queryDocumentSnapshots, e) -> {
+                    if (e != null) {
+                        Log.e("FirestoreError", "Listen failed.", e);
+                        //CB_recordCS.onCallBack(staffCSRecord); // send empty list or handle error
+                        return;
+                    }
+
+                    List<StaffCSRecordModel> staffCSRecord = new ArrayList<>();
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                            String studentNumber = document.getString("studentNumber");
+                            String name = document.getString("name");
+                            String status = document.getString("status");
+                            String task = document.getString("task");
+                            String date = document.getString("completeDate");
+                            String reference = document.getString("reference");
+                            staffCSRecord.add(new StaffCSRecordModel(reference, studentNumber, name, status, task, date));
+                        }
+                    }
+                    CB_recordCS.onCallBack(staffCSRecord);
+                });
+
+    }
+
+    public void readALLPending(staffRecordCallBack CB_recordCS) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("csRecords").whereEqualTo("status", "To be process").orderBy(FieldPath.documentId(), Query.Direction.DESCENDING)
+                .addSnapshotListener((queryDocumentSnapshots, e) -> {
+                    List<StaffCSRecordModel> staffCSRecord = new ArrayList<>();
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                            String studentNumber = document.getString("studentNumber");
+                            String name = document.getString("name");
+                            String status = document.getString("status");
+                            String task = document.getString("task");
+                            String date = document.getString("completeDate");
+                            String reference = document.getString("reference");
+                            staffCSRecord.add(new StaffCSRecordModel(reference, studentNumber, name, status, task, date));
+                        }
+                    }
+                    CB_recordCS.onCallBack(staffCSRecord);
+                });
+
+    }
+
+    public void readALLOnGoing(staffRecordCallBack CB_recordCS) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("csRecords").whereEqualTo("status", "on going").orderBy(FieldPath.documentId(), Query.Direction.DESCENDING)
+                .addSnapshotListener((queryDocumentSnapshots, e) -> {
+                    List<StaffCSRecordModel> staffCSRecord = new ArrayList<>();
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                            String studentNumber = document.getString("studentNumber");
+                            String name = document.getString("name");
+                            String status = document.getString("status");
+                            String task = document.getString("task");
+                            String date = document.getString("completeDate");
+                            String reference = document.getString("reference");
+                            staffCSRecord.add(new StaffCSRecordModel(reference, studentNumber, name, status, task, date));
+                        }
+                    }
+                    CB_recordCS.onCallBack(staffCSRecord);
+                });
+
+    }
+
+    public void readALLComplete(staffRecordCallBack CB_recordCS) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("csRecords").whereEqualTo("status", "complete").orderBy(FieldPath.documentId(), Query.Direction.DESCENDING)
+                .addSnapshotListener((queryDocumentSnapshots, e) -> {
+                    List<StaffCSRecordModel> staffCSRecord = new ArrayList<>();
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                            String studentNumber = document.getString("studentNumber");
+                            String name = document.getString("name");
+                            String status = document.getString("status");
+                            String task = document.getString("task");
+                            String date = document.getString("completeDate");
+                            String reference = document.getString("reference");
+                            staffCSRecord.add(new StaffCSRecordModel(reference, studentNumber, name, status, task, date));
+                        }
+                    }
+                    CB_recordCS.onCallBack(staffCSRecord);
+                });
+
+    }
+    //ADMIN PENDING
+
+    public void readStaffPendingCS(String studentNumber, staffRecordCallBack CB_recordCS) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("csRecords").whereEqualTo("studentNumber", studentNumber).whereEqualTo("status", "To be process").orderBy(FieldPath.documentId(), Query.Direction.DESCENDING).limit(5)
+                .addSnapshotListener((queryDocumentSnapshots, e) -> {
+                    List<StaffCSRecordModel> staffCSRecord = new ArrayList<>();
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                            String name = document.getString("name");
+                            String status = document.getString("status");
+                            String task = document.getString("task");
+                            String date = document.getString("completeDate");
+                            String reference = document.getString("reference");
+                            staffCSRecord.add(new StaffCSRecordModel(reference, studentNumber, name, status, task, date));
+                        }
                     }
                     CB_recordCS.onCallBack(staffCSRecord);
                 });
@@ -131,6 +249,58 @@ public class CSRecord {
 
     public interface staffRecordCallBack {
         void onCallBack(List<StaffCSRecordModel> staffCSRecord);
+    }
+
+    public void readStaffOnGoingCS(String studentNumber, staffOnGoingCS CB_recordCS) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("csRecords").whereEqualTo("studentNumber", studentNumber).whereEqualTo("status", "on going").orderBy(FieldPath.documentId(), Query.Direction.DESCENDING).limit(5)
+                .addSnapshotListener((queryDocumentSnapshots, e) -> {
+                    List<StaffCSOnGoingModel> staffCSRecord = new ArrayList<>();
+                    assert queryDocumentSnapshots != null;
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
+                            String name = document.getString("name");
+                            String status = document.getString("status");
+                            String task = document.getString("task");
+                            String date = document.getString("completeDate");
+                            String reference = document.getString("reference");
+                            staffCSRecord.add(new StaffCSOnGoingModel(reference, studentNumber, name, status, task, date));
+                        }
+                    }
+                    CB_recordCS.onCallBack(staffCSRecord);
+                });
+
+    }
+
+    public interface staffOnGoingCS {
+        void onCallBack(List<StaffCSOnGoingModel> staffCSRecord);
+    }
+
+
+    private String currentDate() {
+        ZoneId manila = ZoneId.of("Asia/Manila");
+        LocalDate today = LocalDate.now(manila);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd yyyy");
+        return today.format(formatter);
+    }
+
+    //UPDATE STUDENT CS RECORD
+    public void updateCompleteCS(String referenceNumber) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("csRecords").whereEqualTo("reference", referenceNumber).get().addOnSuccessListener(query -> {
+           if (!query.isEmpty()) {
+               DocumentSnapshot documentSnapshot = query.getDocuments().get(0);
+               DocumentReference docRef = documentSnapshot.getReference();
+
+               Map<String, Object> updateRecord = new HashMap<>();
+               updateRecord.put("status", "complete");
+               updateRecord.put("completeDate", currentDate());
+
+               docRef.update(updateRecord).addOnSuccessListener(v -> {
+                   Toast.makeText(context, "TASK COMPLETE", Toast.LENGTH_SHORT).show();
+               });
+           }
+        });
     }
 
 
