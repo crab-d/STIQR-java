@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.stiqr_java.R;
+import com.example.stiqr_java.firebase.CSRecord;
+import com.example.stiqr_java.firebase.LateRecord;
+import com.example.stiqr_java.firebase.StudentSchedule;
 import com.example.stiqr_java.teacher.TeacherQR;
 
 /**
@@ -69,6 +72,7 @@ public class TeacherHome extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_teacher_home, container, false);
         Context context = getContext();
+
 
         TextView tv_name = view.findViewById(R.id.tv_name);
         TextView tv_email = view.findViewById(R.id.tv_email);

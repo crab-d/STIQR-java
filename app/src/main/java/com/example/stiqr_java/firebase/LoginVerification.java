@@ -5,13 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.example.stiqr_java.dialog.DialogNotif;
 import com.example.stiqr_java.staff.StaffDashboard;
 import com.example.stiqr_java.student.StudentDashboard;
 import com.example.stiqr_java.teacher.TeacherDashboard;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.concurrent.atomic.AtomicReference;
 
 public class LoginVerification {
     Context context;
@@ -42,15 +41,18 @@ public class LoginVerification {
 
                         semester(sem -> {
                             String section;
+                            Long deductor;
+
                             if (sem.equalsIgnoreCase("sem1")) {
                                 section = snapshot.getString("section");
+                                deductor = snapshot.getLong("deductCounter");
                             } else {
                                 section = snapshot.getString("section1");
+                                deductor = snapshot.getLong("deductCounter1");
 
                             }
                             String gradeLevel = snapshot.getString("gradeLevel");
-                            Long deductor1 = snapshot.getLong("deductCounter");
-                            int deductor = deductor1 != null ? deductor1.intValue() : 0;
+                            int deductor1 = deductor != null ? deductor.intValue() : 0;
 
                             context.getSharedPreferences("STUDENT_SESSION", context.MODE_PRIVATE).edit()
                                     .putString("STUDENT_NAME", name)
@@ -58,11 +60,11 @@ public class LoginVerification {
                                     .putString("STUDENT_NUMBER", id)
                                     .putString("STUDENT_SECTION", section)
                                     .putString("STUDENT_GRADE", gradeLevel)
-                                    .putInt("STUDENT_DEDUCT", deductor)
+                                    .putInt("STUDENT_DEDUCT", deductor1)
                                     .putString("SEMESTER", sem)
                                     .putBoolean("STUDENT_LOG", true)
                                     .apply();
-
+                            DialogNotif.DialogShower(context, "Login successfully");
                             Intent intent = new Intent(context, StudentDashboard.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             context.startActivity(intent);
@@ -87,7 +89,7 @@ public class LoginVerification {
                                 context.startActivity(intent);
                                 activity.finish();
                             } else {
-                                Toast.makeText(context, "Invalid credentials. Please try again.", Toast.LENGTH_SHORT).show();
+                                DialogNotif.DialogShower(context, "Invalid credentails please try again");
                             }
                         });
                     }
@@ -101,6 +103,7 @@ public class LoginVerification {
 
 
     }
+
 
     public void semester(semCallback CB_sem) {
         db.collection("term").document("semester").get()

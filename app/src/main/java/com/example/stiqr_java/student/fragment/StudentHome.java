@@ -142,13 +142,14 @@ public class StudentHome extends Fragment {
             tv_totalLate.setText(String.valueOf(record.size()));
             tv_minuteLate.setText(String.valueOf(totalMinute));
             AtomicInteger deduct = new AtomicInteger(context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).getInt("STUDENT_DEDUCT", 0));
+            //da
             int eligibilityChecker = record.size() - deduct.get();
             DB_LATE.threshold(threshold -> {
                 if (eligibilityChecker >= threshold) {
                     if (record.size() >= deduct.get()) {
-                        tv_status.setText("NOTICE: ELIGIBLE FOR COMMUNITY SERVICES COMPLIANCES IS A MUST PLEASE SCAN DISCIPLINARY OFFICER QR");
-                        deduct.addAndGet(threshold);
-                        context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).edit().putInt("STUDENT_DEDUCT", deduct.get()).apply();
+                        tv_status.setText("NOTICE: ELIGIBLE FOR COMMUNITY SERVICES COMPLIANCE IS A MUST PLEASE SCAN DISCIPLINARY OFFICER QR");
+                        //deduct.addAndGet(threshold);
+//                        context.getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).edit().putInt("STUDENT_DEDUCT", deduct.get()).apply();
                     }
                 }
             });

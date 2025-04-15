@@ -3,6 +3,7 @@ package com.example.stiqr_java.firebase;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.example.stiqr_java.dialog.DialogNotif;
 import com.example.stiqr_java.recyclerview.model.LateRecordAllModel;
 import com.example.stiqr_java.recyclerview.model.LateRecordsModel;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,9 +32,13 @@ public class LateRecord {
         this.context = context;
     }
 
+
+
     //grade 12
     public void readAllRecord(String docname, String teacherEmail, String gradeLevel, lateRecordCallBack callback) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        //get all section
+
         ArrayList<String> sectionList = new ArrayList<>();
         db.collection("teachers").document(docname).collection("class").get().addOnSuccessListener(QueryDocumentSnapshot -> {
            if (!QueryDocumentSnapshot.isEmpty()) {
@@ -75,7 +80,8 @@ public class LateRecord {
                }
 
            } else {
-               Toast.makeText(context, "EMPTY CLASS", Toast.LENGTH_SHORT).show();
+               DialogNotif.DialogShower(context, "Empty class");
+
            }
         });
     }
@@ -101,8 +107,6 @@ public class LateRecord {
                             assert lateArrival != null;
                             totalMinuteLate += Integer.parseInt(lateArrival);
                         }
-                    } else {
-                        Toast.makeText(context, "NO RECORD", Toast.LENGTH_SHORT).show();
                     }
                     callBackRecord.onRecordLoad(lateRecordList, totalMinuteLate);
                 });
@@ -124,12 +128,9 @@ public class LateRecord {
                             String teacher = document.getString("teacher");
                             String schedule = document.getString("schedule");
                             recentLate.add(new LateRecordsModel(date, subject, teacher, lateArrival, schedule));
-
                             assert lateArrival != null;
-
                         }
-
-
+                    }else {
                     }
                     CB_homeRecord.onHomeRecordLoad(recentLate);
                 });
@@ -216,7 +217,7 @@ public class LateRecord {
                                             Long currentViolatorsCount = query.getLong("count");
                                             String violatorLogID = "violator" + currentViolatorsCount;
                                             db.collection("lateRecords").document(gradeLevel).collection(section).document(violatorLogID).set(violatorData).addOnSuccessListener(v -> {
-                                                Toast.makeText(context, "LATE RECORDED SUCCESSFULLY", Toast.LENGTH_SHORT).show();
+                                                DialogNotif.DialogShower(context, "Late recorded successfully");
                                             });
                                             currentViolatorsCount += 1;
                                             long newCount = currentViolatorsCount;
@@ -224,10 +225,10 @@ public class LateRecord {
                                         }
                                     });
                         } else {
-                            Toast.makeText(context, "This subject has already ended", Toast.LENGTH_SHORT).show();
+                            DialogNotif.DialogShower(context, "This subject is already ended");
                         }
                     } else {
-                        Toast.makeText(context, "This teacher is not registered in your schedule or something went wrong.", Toast.LENGTH_SHORT).show();
+                        DialogNotif.DialogShower(context, "This teacher is not in your schedule or scanned invalid qr");
                     }
                 });
     }

@@ -1,9 +1,11 @@
 package com.example.stiqr_java.firebase;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.stiqr_java.dialog.DialogNotif;
 import com.example.stiqr_java.recyclerview.model.CSModel;
 import com.example.stiqr_java.recyclerview.model.StaffCSOnGoingModel;
 import com.example.stiqr_java.recyclerview.model.StaffCSRecordModel;
@@ -147,6 +149,7 @@ public class CSRecord {
                     }
 
                     List<StaffCSRecordModel> staffCSRecord = new ArrayList<>();
+                    assert queryDocumentSnapshots != null;
                     if (!queryDocumentSnapshots.isEmpty()) {
                         for (DocumentSnapshot document : queryDocumentSnapshots.getDocuments()) {
                             String studentNumber = document.getString("studentNumber");
@@ -297,7 +300,8 @@ public class CSRecord {
                updateRecord.put("completeDate", currentDate());
 
                docRef.update(updateRecord).addOnSuccessListener(v -> {
-                   Toast.makeText(context, "TASK COMPLETE", Toast.LENGTH_SHORT).show();
+                   DialogNotif.DialogShower(context, "Task mark as complete successfully");
+
                });
            }
         });
@@ -333,7 +337,7 @@ public class CSRecord {
                        DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
                        db.collection("csRecords").document(documentSnapshot.getId()).update(updates)
                                .addOnSuccessListener(v -> {
-                                   Toast.makeText(context, "ASSIGNED SUCCESSFULLY", Toast.LENGTH_SHORT).show();         
+                                   DialogNotif.DialogShower(context, "Student assigned task successfully");
                        });
                    }
                 });
@@ -348,9 +352,11 @@ public class CSRecord {
                 .addOnSuccessListener(DocumentSnapshot1 -> {
                     if (DocumentSnapshot1.exists()) {
                         String count1 = DocumentSnapshot1.getString("count");
-                        int count = Integer.parseInt(count1);
+                        int count = Integer.parseInt(count1); //reference ccounter
+
                         String ref = DocumentSnapshot1.getString("reference");
                         String formatCount = String.format("%06d", count);
+
                         String reference = ref + studentNumber + "-" + formatCount;
                         String completeDate = "---";
                         String status = "To be process";
@@ -373,11 +379,13 @@ public class CSRecord {
                         db.collection("counters").document("CSRecord").get().addOnSuccessListener(DocumentSnapshot -> {
                             if (DocumentSnapshot.exists()) {
                                 Long counter = DocumentSnapshot.getLong("count");
-                                String docName = counter + "CSLog";
+                                @SuppressLint("DefaultLocale") String formatRef = String.format("%06d", counter);
+
+                                String docName = formatRef + "CSLog";
 
                                 //insert data
                                 db.collection("csRecords").document(docName).set(CSData).addOnSuccessListener(v -> {
-                                    Toast.makeText(context, "STUDENT VIOLATION RECORDED", Toast.LENGTH_SHORT).show();
+                                    DialogNotif.DialogShower(context, "Student violation recorded");
                                 });
 
                                 //update document counter

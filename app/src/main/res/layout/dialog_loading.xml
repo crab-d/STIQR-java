@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content">
+
+
+
+    <TextView
+        android:drawableTop="@drawable/ic_alert"
+        android:drawablePadding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOADING"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/primary"
+        android:textSize="15dp"
+        android:fontFamily="@font/p_med"
+        android:id="@+id/tv_message"/>
+
+</LinearLayout>

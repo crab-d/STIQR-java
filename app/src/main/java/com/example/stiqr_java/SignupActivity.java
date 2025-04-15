@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.example.stiqr_java.dialog.DialogNotif;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
@@ -58,7 +59,7 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         if (!hasInternet(this)) {
-            Toast.makeText(this, "Intenet connection is required",Toast.LENGTH_SHORT).show();
+            DialogNotif.DialogShower(this, "No internet connection");
             finish();
         } else {
 
@@ -135,7 +136,8 @@ public class SignupActivity extends AppCompatActivity {
 
                 }).addOnFailureListener(e -> {
                     // Handle errors
-                    Toast.makeText(this, "Failed to fetch sections: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    DialogNotif.DialogShower(this, "Failed to fetch sections");
+
                     Log.e("FirestoreError", "Error fetching sections", e);
 
                     progressBar.setVisibility(View.GONE);
@@ -205,7 +207,8 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         if (TextUtils.isEmpty(section)) {
-            Toast.makeText(this, "Section is required", Toast.LENGTH_SHORT).show();
+            DialogNotif.DialogShower(this, "Please choose a section");
+
             return;
         }
 
@@ -268,7 +271,7 @@ public class SignupActivity extends AppCompatActivity {
 
                             return null;
                         }).addOnSuccessListener(aVoid -> {
-                            Toast.makeText(SignupActivity.this, "Account registered successfully", Toast.LENGTH_SHORT).show();
+                            DialogNotif.DialogShower(this, "Account registered successfully");
                             Intent intent = new Intent(this, LoginActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
@@ -290,7 +293,7 @@ public class SignupActivity extends AppCompatActivity {
                             transaction.set(firestore.collection("users").document(userId), user);
                             return null;
                         }).addOnSuccessListener(aVoid -> {
-                            Toast.makeText(SignupActivity.this, "Account registered successfully", Toast.LENGTH_SHORT).show();
+                            DialogNotif.DialogShower(this, "Account registered successfully");
                             Intent intent = new Intent(this, LoginActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);

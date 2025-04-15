@@ -38,7 +38,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:fontFamily="@font/p_med"
-
                 android:layout_height="wrap_content"
                 android:text="TUESDAY"
                 android:textAlignment="center"
@@ -73,7 +72,6 @@
                 android:layout_height="match_parent"
                 android:padding="10dp"
                 android:scrollbarSize="0dp"
-
                 android:id="@+id/rv_wednesday"/>
 
             <TextView
@@ -84,7 +82,6 @@
                 android:textAlignment="center"
                 android:textStyle="bold"
                 android:fontFamily="@font/p_med"
-
                 android:background="@color/primary"
                 android:textColor="@color/white"
                 android:textSize="20dp"/>
@@ -94,7 +91,6 @@
                 android:layout_height="match_parent"
                 android:padding="10dp"
                 android:scrollbarSize="0dp"
-
                 android:id="@+id/rv_thursday"/>
 
             <TextView
@@ -135,7 +131,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="10dp"
-
                 android:scrollbarSize="0dp"
                 android:id="@+id/rv_saturday"/>
 

@@ -1,8 +1,11 @@
 package com.example.stiqr_java.student;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
@@ -13,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.stiqr_java.LoginActivity;
 import com.example.stiqr_java.R;
+import com.example.stiqr_java.dialog.DialogNotif;
 import com.example.stiqr_java.firebase.CSRecord;
 import com.example.stiqr_java.student.fragment.Record.RecordParentFrag;
 import com.example.stiqr_java.student.fragment.StudentHome;
@@ -93,7 +97,7 @@ public class StudentDashboard extends AppCompatActivity {
             String gradeLevel = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_GRADE", "NAH");
             String teacherEmail = result.getContents();
             String studentNumber = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("STUDENT_NUMBER", "NAH");
-
+            String sem = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getString("SEMESTER", "sem1");
 
             DB_LATELOG.readLateRecord(studentNumber, gradeLevel, section, (lateRecord, hi) -> {
                 int lateCount = lateRecord.size();
@@ -105,31 +109,45 @@ public class StudentDashboard extends AppCompatActivity {
 
                      userDoc.get().addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()) {
-                            Long newCount = documentSnapshot.getLong("deductCounter");
-                            assert newCount != null;
-                            AtomicInteger deductCounter = new AtomicInteger(newCount.intValue());
 
-                            if (lateCount > deductCounter.get()) {
+                            int deductCounter = getSharedPreferences("STUDENT_SESSION", MODE_PRIVATE).getInt("STUDENT_DEDUCT", 0);
+
+                            if (lateCount > deductCounter) {
                                 CSRecord DB_CS = new CSRecord(this);
-                                //retrieve threshold
+                                int conditional = lateCount - deductCounter;
                                 DB_CS.threshold(threshold -> {
-                                    if (threshold == 0) {
-                                        return;
-                                    }
+                                    if (conditional >= threshold) {
+                                        int newCount = deductCounter + threshold;
 
-                                    while (lateCount > deductCounter.get()) {
                                         DB_CS.addCSRecord(name, studentNumber);
-                                        deductCounter.addAndGet(threshold);
-                                        userDoc.update("deductCounter", deductCounter.get());
+
+                                        getSharedPreferences("STUDENT_SESSION", Context.MODE_PRIVATE).edit().putInt("STUDENT_DEDUCT", newCount).apply();
+                                        if (sem.equalsIgnoreCase("sem1")) {
+                                            userDoc.update("deductCounter", deductCounter + threshold);
+                                        } else {
+                                            userDoc.update("deductCounter1", deductCounter + threshold);
+                                        }
+                                        new Handler().postDelayed(() -> {
+                                            loadFragment(new StudentHome());
+
+                                        }, 400);
+                                    } else {
+                                        DialogNotif.DialogShower(this, "Not eligible for cs");
                                     }
                                 });
 
+                            } else {
+                                DialogNotif.DialogShower(this, "Not eligible for cs");
                             }
                         }
                      });
                  //if qr from teacher, just add new late record
                  } else {
                      DB_LATELOG.addLateStudent(name, section, gradeLevel, teacherEmail, studentNumber);
+                     new Handler().postDelayed(() -> {
+                         loadFragment(new StudentHome());
+
+                     }, 1000);
                  }
 
             });
