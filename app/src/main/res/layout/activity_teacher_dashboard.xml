@@ -47,7 +47,7 @@
             android:id="@+id/tv_records"
             android:clickable="true"
             android:textAlignment="center"
-            android:drawableTop="@drawable/ic_home"/>
+            android:drawableTop="@drawable/ic_record"/>
 
         <TextView
             android:layout_width="0dp"
@@ -61,7 +61,7 @@
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textAlignment="center"
-            android:drawableTop="@drawable/ic_home"/>
+            android:drawableTop="@drawable/ic_logout"/>
 
 
     </LinearLayout>

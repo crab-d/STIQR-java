@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SEACH STUDENT"
+            android:text="SEARCH STUDENT"
             android:fontFamily="@font/p_med"
             android:textColor="@color/primary"
             android:textSize="20dp"
