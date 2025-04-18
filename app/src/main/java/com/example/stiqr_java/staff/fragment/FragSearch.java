@@ -78,6 +78,10 @@ public class FragSearch extends Fragment {
 
         btn_search.setOnClickListener(v -> {
             String studentNumber = et_search.getText().toString().trim();
+            if (studentNumber.isEmpty()) {
+                et_search.setError("Enter student number");
+                return;
+            }
             rv_student.setLayoutManager(new LinearLayoutManager(context));
             DB_Student.searchStudent(studentNumber, student -> {
                 if (!student.isEmpty()) {
